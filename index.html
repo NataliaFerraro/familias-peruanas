@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Familias Peruanas</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:#F7F5F1;color:#0F0E0C;-webkit-font-smoothing:antialiased;font-size:14px;line-height:1.6}
+:root{
+  --gold:#C4933A;--gold-lt:rgba(196,147,58,0.09);--gold-bd:rgba(196,147,58,0.25);
+  --ink:#0F0E0C;--ink2:#3A3830;--ink3:#8A8680;
+  --bg:#F7F5F1;--bg2:#EDEAE4;--bg3:#E3DFD8;--wh:#FAFAF8;
+  --bdr:rgba(0,0,0,0.09);--bdr2:rgba(0,0,0,0.05);
+  --retail:#2D5FA0;--salud:#0B6E4F;--finanzas:#8B2000;--edu:#5B3FA0;--entret:#C45A00;
+}
+button{cursor:pointer;font-family:'DM Sans',sans-serif}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useState } = React;
+
+const CLUSTERS = [
+  { id:'cuidadores', name:'Los cuidadores entregados', n:125, pct:45, color:'#C4933A', pos:{x:65,y:18}, quadrant:'Futuro + Otros',
+    desc:'El cluster más grande. Orientados al futuro de su familia y los otros. Motor: conexión y legado. Priorizan a los suyos sobre metas personales.',
+    indices:[{name:'Conexión',val:5.6},{name:'Autonomía',val:5.7},{name:'Bienestar',val:5.3},{name:'Crecimiento',val:5.2},{name:'Legado',val:4.9},{name:'Seguridad',val:4.7},{name:'Disfrute',val:4.2}],
+    motivacion:[{l:'Tiempo de calidad con los que quiero',p:30},{l:'Construir algo duradero para la familia',p:20},{l:'Superación personal y progreso',p:17}],
+    metas:[{l:'Familia sana',p:27},{l:'Universidad del hijo',p:25},{l:'Vivienda propia',p:18},{l:'Emprendimiento',p:10}],
+    datos:[{l:'Pago con billetera digital',v:'50%'},{l:'Ahorra para terreno/casa',v:'34%'},{l:'Sin deuda activa',v:'41%'},{l:'Sin red de cuidado',v:'40%'},{l:'Ahorra para educ. hijos',v:'9%'}]},
+  { id:'arquitectos', name:'Los arquitectos del equilibrio', n:42, pct:15, color:'#2D5FA0', pos:{x:20,y:18}, quadrant:'Futuro + Yo',
+    desc:'Buscan bienestar propio y equilibrio emocional. Alta autonomía. Mayor uso de billeteras digitales. La seguridad no es su driver principal.',
+    indices:[{name:'Autonomía',val:5.7},{name:'Bienestar',val:5.0},{name:'Crecimiento',val:5.0},{name:'Conexión',val:4.7},{name:'Legado',val:4.6},{name:'Seguridad',val:3.9},{name:'Disfrute',val:3.8}],
+    motivacion:[{l:'Equilibrio físico, mental y emocional',p:24},{l:'Tiempo de calidad con los que quiero',p:19},{l:'Superación personal y progreso',p:19}],
+    metas:[{l:'Familia sana',p:38},{l:'Universidad del hijo',p:21},{l:'Emprendimiento',p:21},{l:'Estudios propios',p:7}],
+    datos:[{l:'Pago con billetera digital',v:'57% — el más alto'},{l:'Ahorra para terreno/casa',v:'26%'},{l:'Sin deuda activa',v:'43%'},{l:'Sin red de cuidado',v:'40%'},{l:'Ahorra para educ. hijos',v:'5%'}]},
+  { id:'inversionistas', name:'Los inversionistas proactivos', n:34, pct:12, color:'#5B3FA0', pos:{x:43,y:40}, quadrant:'Futuro + Yo/Otros',
+    desc:'Orientados al crecimiento personal y superación. Mayor tolerancia al riesgo. Los más cercanos al crédito productivo.',
+    indices:[{name:'Autonomía',val:5.4},{name:'Crecimiento',val:5.0},{name:'Bienestar',val:4.6},{name:'Legado',val:4.6},{name:'Seguridad',val:4.1},{name:'Conexión',val:4.4},{name:'Disfrute',val:3.7}],
+    motivacion:[{l:'Superación personal y progreso constante',p:38},{l:'Construir algo duradero para la familia',p:24},{l:'Equilibrio físico, mental y emocional',p:12}],
+    metas:[{l:'Familia sana',p:38},{l:'Universidad del hijo',p:18},{l:'Emprendimiento',p:18},{l:'Vivienda propia',p:15}],
+    datos:[{l:'Pago con billetera digital',v:'41%'},{l:'Deuda préstamo bancario',v:'29% — el más alto'},{l:'Sin deuda activa',v:'44%'},{l:'Sin red de cuidado',v:'35%'},{l:'Ahorra para educ. hijos',v:'9%'}]},
+];
+
+const METAS = [
+  { id:'universidad', icon:'🎓', title:'Universidad del hijo', segs:['cuidadores','arquitectos','inversionistas'],
+    encuadre:'"Trato de dar a mi hija lo que yo no tuve." No es aspiración — es una deuda emocional con uno mismo.',
+    stats:[{n:'6/7',l:'la nombran'},{n:'25%',l:'encuesta: meta principal'},{n:'8%',l:'ahorra activamente',red:true}],
+    porqueNo:'El horizonte de 10–14 años paraliza la acción hoy. El cerebro descuenta el futuro lejano. No hay ningún producto que conecte un ahorro activo con una promesa universitaria específica y cercana.',
+    gap:'Brecha entre intención (6/7) y acción (8%): la más grande del campo. El Grupo tiene Interbank + UTP para cerrar ese círculo. Nadie lo ha hecho.'},
+  { id:'casa', icon:'🏠', title:'Casa propia o terreno', segs:['cuidadores','arquitectos'],
+    encuadre:'"Lo que siempre tengo en mente hace años es comprar mi terreno." No es lujo: es seguridad.',
+    stats:[{n:'28%',l:'encuesta: meta de ahorro'},{n:'0/7',l:'con plan financiero activo',red:true}],
+    porqueNo:'El monto se siente inalcanzable sin un vehículo de acumulación sostenida. El crédito hipotecario asusta porque se percibe como la deuda más grande posible.',
+    gap:'La meta es concreta y persistente. El instrumento que la hace creíble — un plan con fecha y monto visualizado — no existe en el mercado peruano.'},
+  { id:'salud', icon:'🛡️', title:'Colchón de salud', segs:['cuidadores','arquitectos','inversionistas'],
+    encuadre:'"Si yo me pongo mal, ¿quién hace el dinero?" No es una meta positiva — es defensa contra el peor escenario.',
+    stats:[{n:'~40%',l:'ahorra para emergencias'},{n:'#1',l:'driver de ahorro del campo'}],
+    porqueNo:'El colchón existe pero es frágil e informal. Efectivo escondido, saldo de libre retiro que se gasta antes de la emergencia. No hay seguro accesible ni consulta preventiva de bajo costo.',
+    gap:'El ahorro no sobrevive hasta la emergencia porque es de libre retiro. Inkafarma + consulta express + cuenta "fondo de salud" en Interbank cubren ambos lados.'},
+  { id:'emprendimiento', icon:'💡', title:'Emprendimiento propio', segs:['arquitectos','inversionistas'],
+    encuadre:'"Me gustaría tener algo flexible… yo trabajar y tener a mi hijo ahí cuidado." No es ambición de escala — es autonomía.',
+    stats:[{n:'12%',l:'encuesta: meta de ahorro'},{n:'Latente',l:'en varios casos del campo'}],
+    porqueNo:'La barrera más nombrada no es el capital — es el cuidado del hijo. Sin alguien con quien dejar al niño, no hay tiempo para emprender.',
+    gap:'Dos brechas superpuestas: cuidado infantil que libere el tiempo, y acceso a capital pequeño sin burocracia. Ambas son resolubles por el Grupo.'},
+  { id:'experiencias', icon:'✈️', title:'Experiencias en familia', segs:['cuidadores'],
+    encuadre:'"Las buenas y las malas, siempre juntos." El ocio es la prueba de que la familia está progresando.',
+    stats:[{n:'5/7',l:'quieren salir más'},{n:'0/7',l:'mencionaron Cineplanet',red:true}],
+    porqueNo:'El costo de coordinación es alto. La incertidumbre sobre si la experiencia funciona con el hijo bloquea la decisión. El presupuesto de ocio compite con el colchón de emergencias.',
+    gap:'El deseo existe. El Grupo tiene todas las piezas (Cineplanet, Bembos, Real Plaza). Pero nadie las conecta en una propuesta que resuelva la tarde completa con una decisión.'},
+  { id:'estudios', icon:'📚', title:'Estudios propios inconclusos', segs:['arquitectos','inversionistas'],
+    encuadre:'"He venido ejerciendo cargos superiores pero no puedo postular porque no tengo la carrera."',
+    stats:[{n:'2/7',l:'estudiando actualmente'},{n:'Latente',l:'en varios más'}],
+    porqueNo:'Para los padres, el fin de semana compite con el tiempo familiar. Para las madres, el virtual no funciona con un hijo presente. El único horario viable (8am–1pm) no existe en ninguna universidad peruana hoy.',
+    gap:'"UTP Mañanas" — presencial 8am–1pm — no requiere nueva infraestructura. Requiere una decisión de producto. La demanda reprimida está documentada en el campo.'},
+];
+
+const INSIGHTS = [
+  { id:'i1', num:'01', title:'El dinero disponible se gasta. La cuenta que bloquea el acceso no existe.', conf:'Alta confianza · 4/7', tipo:'Quick win',
+    impacto:{retail:'med',salud:'low',finanzas:'high',edu:'med',entret:'low'},
+    desc:'La junta funciona porque el compromiso ocurre antes de recibir el dinero. La cuenta bancaria de libre retiro falla exactamente porque no tiene ninguno de esos mecanismos.',
+    quotes:['"Si lo tenemos, lo gastamos. Con la junta no lo gastamos." — Padre · hijo 4 años'],
+    deeper:'La junta no es solución de pobreza — es el mejor commitment device del mercado financiero peruano. El primer banco que la replique con seguridad formal gana el territorio que los sistemas informales tienen hoy.',
+    segs:['cuidadores','arquitectos']},
+  { id:'i2', num:'02', title:'La meta educativa del hijo es la más intensa — y la más huérfana de instrumento.', conf:'Alta confianza · 6/7 vs 8%', tipo:'Cross-plataforma',
+    impacto:{retail:'low',salud:'low',finanzas:'high',edu:'high',entret:'low'},
+    desc:'La universidad del hijo aparece en 6/7 con carga emocional alta — no como aspiración abstracta sino como corrección de algo que a los propios padres les fue negado. La meta no es racional: es una herida.',
+    quotes:['"Trato de dar a mi hija lo que yo no tuve." — Padre · hija 10 años'],
+    deeper:'El horizonte de 10 años paraliza la acción hoy. Un producto que acorte ese horizonte percibido — "en 3 años empiezas a pagar la matrícula" — cambia la psicología de la decisión.',
+    segs:['cuidadores','arquitectos','inversionistas']},
+  { id:'i3', num:'03', title:'No temen al crédito. Temen a la tarjeta abierta. Son cosas distintas.', conf:'Alta confianza · 4/7', tipo:'Oportunidad de producto',
+    impacto:{retail:'med',salud:'low',finanzas:'high',edu:'low',entret:'low'},
+    desc:'La aversión es específica: la línea de crédito abierta puede acumularse sin que se note. El crédito de monto fijo, propósito declarado y cuota conocida no genera esa ansiedad. Hoy piden prestado a un familiar.',
+    quotes:['"Teniendo esas tarjetas te puedes exceder… si lo hubiera hecho por cuotas, lo hubiera pagado."'],
+    deeper:'El historial de comportamiento en Sip existe y no está siendo leído como señal crediticia. El crédito que esta familia acepta no es el que el banco ofrece hoy.',
+    segs:['inversionistas','arquitectos']},
+  { id:'i4', num:'04', title:'El dinero de esta familia trabaja más en sistemas informales que en el banco.', conf:'Transversal · campo + encuesta', tipo:'Insight estructural',
+    impacto:{retail:'med',salud:'low',finanzas:'high',edu:'med',entret:'med'},
+    desc:'La junta, el préstamo entre familiares, el efectivo escondido. Estos sistemas existen porque el banco formal no resuelve lo que resuelven ellos: bloquear el acceso, dar crédito sin historial, operar con confianza social.',
+    quotes:[],
+    deeper:'Interbank no compite con los bancos de esta familia. Compite con sus sistemas informales. Y esos sistemas ganan porque el dinero con nombre no se gasta.',
+    segs:['cuidadores','arquitectos','inversionistas']},
+  { id:'i5', num:'05', title:'4 de 7 familias no tienen con quién dejar al hijo. El consumo se detiene.', conf:'4/7 documentado', tipo:'Cross-plataforma',
+    impacto:{retail:'high',salud:'med',finanzas:'low',edu:'high',entret:'high'},
+    desc:'Cuando la red de cuidado falla, no pueden ir al mall, no pueden ir al médico tranquilas, no pueden estudiar, no pueden trabajar extra. El Grupo pierde consumo directamente.',
+    quotes:['"Inclusive lo podría llevar a una tienda, yo trabajar y tenerlo ahí cuidado." — Madre · hijo 5 años'],
+    deeper:'La madre que tiene al hijo cuidado consume más en todo el ecosistema. Dónde y bajo qué formato ocurre ese cuidado es una pregunta operativa — el campo solo dice que la demanda existe y está reprimida.',
+    segs:['arquitectos','inversionistas']},
+];
+
+const OPPS = [
+  {id:'o1',tipo:'Quick win',titulo:'Cuenta con meta nombrada y fricción voluntaria',desc:'El dinero con nombre no se gasta. El cashback de Sip la alimenta automáticamente. Una cuenta donde el usuario elige meta, monto y fecha. Retirar antes requiere un paso adicional.',segs:'Cuidadores y Arquitectos',plat:'Interbank + Sip',q:'tl'},
+  {id:'o2',tipo:'Quick win',titulo:'Cuenta "Universidad de mi hijo/a" + beneficio UTP',desc:'Ahorro etiquetado con monto sugerido según edad del hijo. Beneficio concreto en matrícula UTP. El Grupo tiene las dos piezas. Nadie las ha conectado.',segs:'Todos los clusters',plat:'Interbank + UTP',q:'tl'},
+  {id:'o3',tipo:'Adjacent',titulo:'Crédito de propósito fijo desde historial Sip',desc:'"S/800 para la laptop, 6 cuotas, sin línea abierta" basado en comportamiento de pago en Sip. Sin tarjeta. Sin exposición indefinida.',segs:'Inversionistas y Arquitectos',plat:'Sip → Interbank',q:'tr'},
+  {id:'o4',tipo:'Adjacent',titulo:'Consulta médica express en Inkafarma',desc:'Sin cita, horario extendido, S/30–40. El médico prescribe, la farmacia despacha. Modelo validado en LATAM.',segs:'Todos los clusters',plat:'Inkafarma + Clínica Aviva',q:'tr'},
+  {id:'o5',tipo:'Para validar',titulo:'Cashback de Sip como alimentador automático de meta',desc:'El mismo pago cotidiano construye el ahorro para la meta declarada. Conecta el comportamiento presente con el objetivo futuro sin esfuerzo adicional.',segs:'Cuidadores entregados',plat:'Sip + Interbank',q:'bl'},
+  {id:'o6',tipo:'Para validar',titulo:'Pack Sábado Familiar',desc:'Entrada + menú en Bembos en un clic. Cashback con Sip. Nadie fuera del Grupo puede hacer esto — no tiene todas las piezas en el mismo lugar.',segs:'Cuidadores entregados',plat:'Cineplanet + Bembos + Sip',q:'bl'},
+  {id:'o7',tipo:'Net-new · Disruptiva',titulo:'La junta digital con respaldo formal de Interbank',desc:'El banco respalda la distribución con seguridad formal. La presión social sigue siendo del grupo. Digitaliza el mejor commitment device del Perú informal.',segs:'Arquitectos y Cuidadores',plat:'Interbank + Sip',q:'br'},
+  {id:'o8',tipo:'Net-new · Disruptiva',titulo:'Score crediticio desde comportamiento en el ecosistema',desc:'Comportamiento en Mass, Inkafarma, Cineplanet como proxy crediticio. Credicorp tiene historial bancario. Interbank tiene datos de ecosistema que Credicorp no puede tener.',segs:'Inversionistas proactivos',plat:'Todas las plataformas → Interbank',q:'br'},
+];
+
+const Tag = ({children, c='gold', xs}) => {
+  const map={gold:'rgba(196,147,58,0.12);#7A4A0A',blue:'rgba(45,95,160,0.1);#2D5FA0',green:'rgba(11,110,79,0.1);#0B6E4F',purple:'rgba(74,26,107,0.08);#4A1A6B',red:'rgba(139,32,0,0.08);#8B2000'};
+  const [bg,col]=(map[c]||map.gold).split(';');
+  return <span style={{display:'inline-block',padding:xs?'1px 6px':'2px 8px',borderRadius:100,fontSize:xs?9:10,fontWeight:600,margin:2,background:bg,color:col}}>{children}</span>;
+};
+
+const Eyebrow = ({label}) => (
+  <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:8}}>
+    <div style={{width:24,height:2,background:'var(--gold)',borderRadius:1}}/>
+    <span style={{fontFamily:'Syne',fontSize:10,fontWeight:600,letterSpacing:'2.5px',textTransform:'uppercase',color:'var(--gold)'}}>{label}</span>
+  </div>
+);
+
+const segColor={cuidadores:'#C4933A',arquitectos:'#2D5FA0',inversionistas:'#5B3FA0'};
+const segShort={cuidadores:'Cuidadores',arquitectos:'Arquitectos',inversionistas:'Inversionistas'};
+
+// ── OVERVIEW ──
+const Overview = ({go}) => (
+  <div style={{maxWidth:960,margin:'0 auto',padding:'40px 32px 80px'}}>
+    <div style={{background:'#0A0908',borderRadius:16,padding:'48px 52px',marginBottom:10}}>
+      <div style={{fontFamily:'Syne',fontSize:10,fontWeight:600,letterSpacing:'2px',textTransform:'uppercase',color:'var(--gold)',marginBottom:12}}>La Victoria Lab × Intercorp · Lima 2025</div>
+      <div style={{fontFamily:'Syne',fontSize:38,fontWeight:800,color:'#FAF8F5',lineHeight:1.1,marginBottom:14}}>Familias Peruanas</div>
+      <div style={{fontSize:13,color:'rgba(250,248,245,0.45)',lineHeight:1.7,maxWidth:520,marginBottom:32}}>
+        7 entrevistas en profundidad · Encuesta n=278 · Lima Norte, Sur y Este · NSE C · Familias recién formadas con hijos menores de 10 años
+      </div>
+      <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:10}}>
+        {[['~500K','hogares NSE C con hijos <10 años en Lima Met.'],['3','segmentos motivacionales identificados'],['6','metas y sueños documentados en campo'],['5','plataformas del Grupo con oportunidades']].map(([n,l],i)=>(
+          <div key={i} style={{background:'rgba(255,255,255,0.05)',border:'0.5px solid rgba(255,255,255,0.08)',borderRadius:10,padding:'14px 16px'}}>
+            <div style={{fontFamily:'Syne',fontSize:26,fontWeight:700,color:'var(--gold)',lineHeight:1,marginBottom:4}}>{n}</div>
+            <div style={{fontSize:11,color:'rgba(250,248,245,0.4)',lineHeight:1.4}}>{l}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:10,marginBottom:32}}>
+      {[['3.36M','Hogares totales Lima Met.','APEIM 2023',false],['~1.55M','Hogares NSE C (48%)','APEIM 2023',false],['~41%','Con hijos <12 años Lima Met.','INEI/ENAHO',false],['52%','Usa billetera digital como pago principal','Encuesta n=278',true]].map(([n,l,s,red],i)=>(
+        <div key={i} style={{background:red?'rgba(139,32,0,0.04)':'var(--wh)',border:`0.5px solid ${red?'rgba(139,32,0,0.2)':'var(--bdr)'}`,borderRadius:10,padding:'16px 18px'}}>
+          <div style={{fontFamily:'Syne',fontSize:24,fontWeight:700,color:red?'#8B2000':'var(--gold)',lineHeight:1,marginBottom:4}}>{n}</div>
+          <div style={{fontSize:11,color:'var(--ink3)',lineHeight:1.4}}>{l}</div>
+          <div style={{fontSize:9,color:'var(--ink3)',opacity:0.5,marginTop:3}}>{s}</div>
+        </div>
+      ))}
+    </div>
+    <Eyebrow label="Explorar la investigación"/>
+    <div style={{fontFamily:'Syne',fontSize:22,fontWeight:700,marginBottom:20}}>¿Por dónde quieres empezar?</div>
+    <div style={{display:'grid',gridTemplateColumns:'repeat(2,1fr)',gap:12}}>
+      {[{id:'segmentos',icon:'◉',title:'Segmentos motivacionales',desc:'Los 3 clusters de la encuesta. Quiénes son, qué los mueve, cómo difieren.',c:'var(--gold)'},{id:'metas',icon:'◎',title:'Metas y sueños',desc:'Las 6 metas del campo, qué dice la investigación, y por qué el gap persiste.',c:'#2D5FA0'},{id:'insights',icon:'◆',title:'Insights × Plataformas',desc:'Heatmap de impacto: cómo cada hallazgo afecta cada vertical del Grupo.',c:'#0B6E4F'},{id:'oportunidades',icon:'▸',title:'Oportunidades',desc:'Matriz impacto/esfuerzo: quick wins, adjacentes, disruptivas.',c:'#5B3FA0'}].map(item=>(
+        <div key={item.id} onClick={()=>go(item.id)} style={{background:'var(--wh)',border:'0.5px solid var(--bdr)',borderLeft:`3px solid ${item.c}`,borderRadius:12,padding:'22px 24px',cursor:'pointer',transition:'transform 0.15s'}}
+          onMouseEnter={e=>e.currentTarget.style.transform='translateY(-2px)'}
+          onMouseLeave={e=>e.currentTarget.style.transform='translateY(0)'}>
+          <div style={{fontSize:20,color:item.c,marginBottom:8}}>{item.icon}</div>
+          <div style={{fontFamily:'Syne',fontSize:15,fontWeight:600,marginBottom:6}}>{item.title}</div>
+          <div style={{fontSize:12,color:'var(--ink3)',lineHeight:1.6}}>{item.desc}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+// ── SEGMENTOS ──
+const Segmentos = () => {
+  const [active, setActive] = useState(null);
+  const cl = active ? CLUSTERS.find(c=>c.id===active) : null;
+  return (
+    <div style={{maxWidth:960,margin:'0 auto',padding:'40px 32px 80px'}}>
+      <Eyebrow label="Bloque 01 · Segmentos motivacionales"/>
+      <div style={{fontFamily:'Syne',fontSize:26,fontWeight:700,marginBottom:8}}>Tres clusters de la encuesta</div>
+      <div style={{fontSize:13,color:'var(--ink3)',marginBottom:24}}>Clusterización sobre 7 índices motivacionales · n=278 · Mapa 2×2: Presente–Futuro × Yo–Otros</div>
+
+      <div style={{background:'var(--wh)',border:'0.5px solid var(--bdr)',borderRadius:12,padding:'20px 24px',marginBottom:12}}>
+        <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1.5px',color:'var(--ink3)',marginBottom:12}}>Mapa motivacional</div>
+        <div style={{position:'relative',height:220,background:'var(--bg)',borderRadius:8,border:'0.5px solid var(--bdr2)'}}>
+          <div style={{position:'absolute',bottom:6,left:'50%',transform:'translateX(-50%)',fontSize:10,color:'var(--ink3)'}}>← Yo · · · Otros →</div>
+          <div style={{position:'absolute',left:8,top:'50%',transform:'translateY(-50%) rotate(-90deg)',fontSize:10,color:'var(--ink3)',whiteSpace:'nowrap'}}>← Presente · Futuro →</div>
+          <div style={{position:'absolute',left:'50%',top:0,bottom:20,width:'0.5px',background:'var(--bdr)'}}/>
+          <div style={{position:'absolute',top:'50%',left:20,right:0,height:'0.5px',background:'var(--bdr)'}}/>
+          {CLUSTERS.map(c=>(
+            <div key={c.id} onClick={()=>setActive(active===c.id?null:c.id)} style={{position:'absolute',left:`${c.pos.x}%`,top:`${c.pos.y}%`,background:c.color,color:'white',borderRadius:8,padding:'7px 11px',maxWidth:160,fontSize:11,fontWeight:500,lineHeight:1.3,cursor:'pointer',opacity:active&&active!==c.id?0.5:1,transition:'all 0.15s',boxShadow:active===c.id?`0 0 0 3px ${c.color}44`:undefined,zIndex:active===c.id?2:1}}>
+              {c.name}<div style={{fontSize:10,opacity:0.8,marginTop:2}}>{c.pct}% · n={c.n}</div>
+            </div>
+          ))}
+          <div style={{position:'absolute',left:'28%',bottom:'10%',background:'var(--bg3)',color:'var(--ink3)',borderRadius:8,padding:'7px 11px',fontSize:11,fontWeight:500,lineHeight:1.3,border:'0.5px solid var(--bdr)'}}>
+            Resto<div style={{fontSize:10,opacity:0.7,marginTop:2}}>28% · n=77</div>
+          </div>
+        </div>
+      </div>
+
+      <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:10,marginBottom:12}}>
+        {CLUSTERS.map(c=>(
+          <div key={c.id} onClick={()=>setActive(active===c.id?null:c.id)} style={{background:'var(--wh)',borderRadius:12,border:active===c.id?`1.5px solid ${c.color}`:'0.5px solid var(--bdr)',overflow:'hidden',cursor:'pointer',transition:'all 0.15s',boxShadow:active===c.id?`0 0 0 2px ${c.color}22`:undefined}}>
+            <div style={{height:4,background:c.color}}/>
+            <div style={{padding:'16px 18px'}}>
+              <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1.5px',color:'var(--ink3)',marginBottom:3}}>{c.pct}% · n={c.n}</div>
+              <div style={{fontFamily:'Syne',fontSize:14,fontWeight:600,marginBottom:7,lineHeight:1.2}}>{c.name}</div>
+              <div style={{fontSize:11.5,color:'var(--ink3)',lineHeight:1.6,marginBottom:10}}>{c.desc}</div>
+              <div style={{display:'flex',flexWrap:'wrap',gap:4}}>
+                {c.indices.slice(0,3).map(idx=>(
+                  <span key={idx.name} style={{fontSize:9,padding:'2px 7px',borderRadius:100,fontWeight:600,background:`${c.color}18`,color:c.color}}>{idx.name}: {idx.val}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {cl && (
+        <div style={{background:'var(--wh)',border:`0.5px solid ${cl.color}44`,borderRadius:12,overflow:'hidden'}}>
+          <div style={{padding:'18px 22px',background:'var(--bg2)',borderBottom:'0.5px solid var(--bdr)',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+            <div>
+              <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1.5px',color:cl.color,marginBottom:4}}>{cl.quadrant} · {cl.pct}% · n={cl.n}</div>
+              <div style={{fontFamily:'Syne',fontSize:18,fontWeight:700}}>{cl.name}</div>
+            </div>
+            <button onClick={()=>setActive(null)} style={{background:'var(--bdr2)',border:'none',borderRadius:6,padding:'4px 10px',fontSize:11,color:'var(--ink3)'}}>✕ cerrar</button>
+          </div>
+          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',background:'var(--wh)'}}>
+            <div style={{padding:'16px 18px',borderRight:'0.5px solid var(--bdr)'}}>
+              <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1px',color:'var(--ink3)',marginBottom:12,paddingBottom:5,borderBottom:'0.5px solid var(--bdr2)'}}>Índices motivacionales</div>
+              {cl.indices.map(idx=>(
+                <div key={idx.name} style={{marginBottom:8}}>
+                  <div style={{display:'flex',justifyContent:'space-between',marginBottom:3}}>
+                    <span style={{fontSize:11,color:'var(--ink2)'}}>{idx.name}</span>
+                    <span style={{fontSize:11,fontWeight:600,color:'var(--ink)'}}>{idx.val}</span>
+                  </div>
+                  <div style={{height:4,background:'var(--bg3)',borderRadius:2}}>
+                    <div style={{height:'100%',width:`${(idx.val/7)*100}%`,background:cl.color,borderRadius:2}}/>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div style={{padding:'16px 18px',borderRight:'0.5px solid var(--bdr)'}}>
+              <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1px',color:'var(--ink3)',marginBottom:10,paddingBottom:5,borderBottom:'0.5px solid var(--bdr2)'}}>Motivación top</div>
+              {cl.motivacion.map((m,i)=>(
+                <div key={i} style={{display:'flex',gap:8,marginBottom:7,alignItems:'flex-start'}}>
+                  <span style={{fontFamily:'Syne',fontSize:13,fontWeight:700,color:cl.color,minWidth:34}}>{m.p}%</span>
+                  <span style={{fontSize:11,color:'var(--ink2)',lineHeight:1.45}}>{m.l}</span>
+                </div>
+              ))}
+              <div style={{marginTop:14,fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1px',color:'var(--ink3)',marginBottom:10,paddingBottom:5,borderBottom:'0.5px solid var(--bdr2)'}}>Meta principal</div>
+              {cl.metas.map((m,i)=>(
+                <div key={i} style={{display:'flex',gap:8,marginBottom:6,alignItems:'center'}}>
+                  <span style={{fontFamily:'Syne',fontSize:12,fontWeight:700,color:'var(--gold)',minWidth:34}}>{m.p}%</span>
+                  <span style={{fontSize:11,color:'var(--ink2)'}}>{m.l}</span>
+                </div>
+              ))}
+            </div>
+            <div style={{padding:'16px 18px'}}>
+              <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1px',color:'var(--ink3)',marginBottom:10,paddingBottom:5,borderBottom:'0.5px solid var(--bdr2)'}}>Datos de encuesta</div>
+              {cl.datos.map((d,i)=>(
+                <div key={i} style={{marginBottom:10}}>
+                  <div style={{fontFamily:'Syne',fontSize:15,fontWeight:700,color:'var(--gold)'}}>{d.v}</div>
+                  <div style={{fontSize:11,color:'var(--ink3)',lineHeight:1.4}}>{d.l}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+      <div style={{marginTop:12,padding:'12px 16px',background:'var(--bg2)',borderRadius:8,border:'0.5px solid var(--bdr)',fontSize:11.5,color:'var(--ink3)',lineHeight:1.65}}>
+        <strong style={{color:'var(--ink)'}}>Nota metodológica:</strong> Clusterización sobre 7 índices motivacionales (n=278). El 28% "Resto" no mostró perfil diferenciado suficiente. Segmento: Familias recién formadas, hijos 0–10 años, NSE C, Lima Metropolitana.
+      </div>
+    </div>
+  );
+};
+
+// ── METAS ──
+const Metas = () => (
+  <div style={{maxWidth:960,margin:'0 auto',padding:'40px 32px 80px'}}>
+    <Eyebrow label="Bloque 02 · Metas y sueños"/>
+    <div style={{fontFamily:'Syne',fontSize:26,fontWeight:700,marginBottom:8}}>Metas y sueños — y el gap para llegar</div>
+    <div style={{fontSize:13,color:'var(--ink3)',marginBottom:28}}>Las metas no son abstractas. Son concretas, cargadas emocionalmente, y en casi todos los casos no tienen un instrumento que las acompañe.</div>
+    <div style={{display:'grid',gridTemplateColumns:'repeat(2,1fr)',gap:12}}>
+      {METAS.map(m=>(
+        <div key={m.id} style={{background:'var(--wh)',border:'0.5px solid var(--bdr)',borderRadius:12,overflow:'hidden'}}>
+          <div style={{padding:'18px 20px 14px',borderBottom:'0.5px solid var(--bdr2)'}}>
+            <div style={{display:'flex',gap:5,flexWrap:'wrap',marginBottom:8}}>
+              {m.segs.map(s=><span key={s} style={{fontSize:9,fontWeight:600,padding:'2px 8px',borderRadius:100,background:`${segColor[s]}18`,color:segColor[s],textTransform:'uppercase',letterSpacing:'0.5px'}}>{segShort[s]}</span>)}
+            </div>
+            <div style={{fontSize:22,marginBottom:6}}>{m.icon}</div>
+            <div style={{fontFamily:'Syne',fontSize:16,fontWeight:700,marginBottom:6,lineHeight:1.2}}>{m.title}</div>
+            <div style={{fontSize:11.5,fontStyle:'italic',color:'var(--ink3)',lineHeight:1.55,borderLeft:'2px solid var(--gold)',paddingLeft:9}}>{m.encuadre}</div>
+          </div>
+          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr'}}>
+            <div style={{padding:'13px 15px',borderRight:'0.5px solid var(--bdr2)'}}>
+              <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1.5px',color:'var(--ink3)',marginBottom:6,paddingBottom:4,borderBottom:'0.5px solid var(--bdr2)'}}>Qué dice el campo</div>
+              <div style={{marginBottom:8}}>
+                {m.stats.map((s,i)=>(
+                  <div key={i} style={{display:'inline-flex',alignItems:'baseline',gap:4,padding:'3px 9px',borderRadius:6,background:s.red?'rgba(139,32,0,0.08)':'rgba(196,147,58,0.08)',margin:'2px 2px 4px 0',fontSize:11}}>
+                    <span style={{fontFamily:'Syne',fontSize:15,fontWeight:700,color:s.red?'#8B2000':'var(--gold)'}}>{s.n}</span>
+                    <span style={{color:'var(--ink2)'}}>{s.l}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div style={{padding:'13px 15px'}}>
+              <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1.5px',color:'var(--ink3)',marginBottom:6,paddingBottom:4,borderBottom:'0.5px solid var(--bdr2)'}}>Por qué no ocurre</div>
+              <div style={{fontSize:11.5,color:'var(--ink2)',lineHeight:1.65}}>{m.porqueNo}</div>
+            </div>
+          </div>
+          <div style={{padding:'10px 14px',background:'rgba(139,32,0,0.04)',borderTop:'0.5px solid rgba(139,32,0,0.1)',borderLeft:'3px solid #8B2000'}}>
+            <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1px',color:'#8B2000',marginBottom:3}}>El gap</div>
+            <div style={{fontSize:11.5,color:'var(--ink2)',lineHeight:1.6}}>{m.gap}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+// ── INSIGHTS ──
+const Insights = () => {
+  const [active, setActive] = useState(null);
+  const ins = active ? INSIGHTS.find(i=>i.id===active) : null;
+  const platK=['retail','salud','finanzas','edu','entret'];
+  const platL=['Retail','Salud','Finanzas','Educación','Entret.'];
+  const platC={retail:'var(--retail)',salud:'var(--salud)',finanzas:'var(--finanzas)',edu:'var(--edu)',entret:'var(--entret)'};
+  const dotC={high:'#C4933A',med:'rgba(196,147,58,0.4)',low:'rgba(0,0,0,0.12)'};
+  const dotBg={high:'rgba(196,147,58,0.18)',med:'rgba(196,147,58,0.08)',low:'rgba(0,0,0,0.03)'};
+  return (
+    <div style={{maxWidth:960,margin:'0 auto',padding:'40px 32px 80px'}}>
+      <Eyebrow label="Bloque 03 · Insights × Plataformas"/>
+      <div style={{fontFamily:'Syne',fontSize:26,fontWeight:700,marginBottom:8}}>Insights × Plataformas del Grupo</div>
+      <div style={{fontSize:13,color:'var(--ink3)',marginBottom:14}}>Cómo cada hallazgo impacta cada vertical de Intercorp. Clic en un insight para ver el detalle.</div>
+      <div style={{display:'flex',gap:16,alignItems:'center',marginBottom:14,flexWrap:'wrap'}}>
+        {[['Alto','#C4933A'],['Medio','rgba(196,147,58,0.4)'],['Bajo','rgba(0,0,0,0.12)']].map(([l,c])=>(
+          <div key={l} style={{display:'flex',alignItems:'center',gap:5,fontSize:11,color:'var(--ink3)'}}>
+            <div style={{width:10,height:10,borderRadius:'50%',background:c}}/> Impacto {l}
+          </div>
+        ))}
+      </div>
+      <div style={{background:'var(--wh)',border:'0.5px solid var(--bdr)',borderRadius:12,overflow:'hidden',marginBottom:12}}>
+        <table style={{width:'100%',borderCollapse:'collapse'}}>
+          <thead>
+            <tr>
+              <th style={{background:'var(--bg2)',padding:'10px 16px',textAlign:'left',fontSize:10,color:'var(--ink3)',fontWeight:500,letterSpacing:'1px',textTransform:'uppercase',borderRight:'0.5px solid var(--bdr)',minWidth:260}}>Insight</th>
+              {platL.map((l,i)=><th key={l} style={{background:platC[platK[i]],padding:'10px 10px',color:'#FAF8F5',fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1px',textAlign:'center',borderRight:i<4?'0.5px solid rgba(255,255,255,0.1)':undefined}}>{l}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {INSIGHTS.map(i=>(
+              <tr key={i.id} style={{borderBottom:'0.5px solid var(--bdr2)',cursor:'pointer'}} onClick={()=>setActive(active===i.id?null:i.id)}>
+                <td style={{padding:'12px 16px',borderRight:'0.5px solid var(--bdr)',background:active===i.id?'rgba(196,147,58,0.06)':'var(--bg)',transition:'background 0.1s'}}>
+                  <div style={{fontSize:9,fontWeight:600,color:'var(--ink3)',marginBottom:3}}>Insight {i.num}</div>
+                  <div style={{fontSize:12,fontWeight:500,color:'var(--ink)',lineHeight:1.35,fontStyle:'italic'}}>"{i.title}"</div>
+                </td>
+                {platK.map((k,pi)=>(
+                  <td key={k} style={{padding:'7px 5px',textAlign:'center',borderRight:pi<4?'0.5px solid var(--bdr2)':undefined,verticalAlign:'middle'}}>
+                    <div style={{background:dotBg[i.impacto[k]],borderRadius:5,margin:2,padding:'5px 3px',display:'flex',justifyContent:'center',alignItems:'center'}}>
+                      <div style={{width:10,height:10,borderRadius:'50%',background:dotC[i.impacto[k]]}}/>
+                    </div>
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {ins && (
+        <div style={{background:'var(--wh)',border:'0.5px solid var(--gold-bd)',borderRadius:12,overflow:'hidden'}}>
+          <div style={{padding:'16px 20px',background:'var(--bg2)',borderBottom:'0.5px solid var(--bdr)',display:'flex',justifyContent:'space-between',alignItems:'flex-start'}}>
+            <div>
+              <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1.5px',color:'var(--gold)',marginBottom:5,display:'flex',alignItems:'center',gap:6,flexWrap:'wrap'}}>
+                Insight {ins.num} <Tag xs c="gold">{ins.conf}</Tag> <Tag xs c="green">{ins.tipo}</Tag>
+              </div>
+              <div style={{fontFamily:'Syne',fontSize:17,fontWeight:600,color:'var(--ink)',fontStyle:'italic',lineHeight:1.2}}>"{ins.title}"</div>
+            </div>
+            <button onClick={()=>setActive(null)} style={{background:'var(--bdr2)',border:'none',borderRadius:6,padding:'4px 10px',fontSize:11,color:'var(--ink3)',flexShrink:0,marginLeft:16}}>✕</button>
+          </div>
+          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',background:'var(--wh)'}}>
+            <div style={{padding:'16px 18px',borderRight:'0.5px solid var(--bdr)'}}>
+              <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1.5px',color:'var(--ink3)',marginBottom:6,paddingBottom:4,borderBottom:'0.5px solid var(--bdr2)'}}>Descripción</div>
+              <div style={{fontSize:12,color:'var(--ink2)',lineHeight:1.65,marginBottom:10}}>{ins.desc}</div>
+              {ins.quotes.map((q,qi)=>(
+                <div key={qi} style={{borderLeft:'2px solid var(--gold)',padding:'5px 10px',fontStyle:'italic',fontSize:11,color:'var(--ink3)',lineHeight:1.55,background:'rgba(196,147,58,0.04)',borderRadius:'0 4px 4px 0',marginBottom:6}}>{q}</div>
+              ))}
+              <div style={{padding:'10px 12px',background:'rgba(15,14,12,0.04)',borderRadius:7,borderLeft:'3px solid var(--ink)',marginTop:8}}>
+                <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1px',color:'var(--ink3)',marginBottom:3}}>Deeper truth</div>
+                <div style={{fontSize:12,color:'var(--ink)',fontStyle:'italic',lineHeight:1.65}}>{ins.deeper}</div>
+              </div>
+            </div>
+            <div style={{padding:'16px 18px'}}>
+              <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1.5px',color:'var(--ink3)',marginBottom:10,paddingBottom:4,borderBottom:'0.5px solid var(--bdr2)'}}>Impacto por plataforma</div>
+              {platK.map((k,i)=>(
+                <div key={k} style={{display:'flex',alignItems:'center',gap:10,marginBottom:8}}>
+                  <div style={{width:8,height:8,borderRadius:'50%',background:dotC[ins.impacto[k]],flexShrink:0}}/>
+                  <span style={{fontSize:11,color:platC[k],fontWeight:500,width:80}}>{platL[i]}</span>
+                  <span style={{fontSize:11,color:'var(--ink3)'}}>Impacto {ins.impacto[k]==='high'?'alto':ins.impacto[k]==='med'?'medio':'bajo'}</span>
+                </div>
+              ))}
+              <div style={{marginTop:14,fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1px',color:'var(--ink3)',marginBottom:8}}>Segmentos relevantes</div>
+              <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
+                {ins.segs.map(s=>{ const cl=CLUSTERS.find(c=>c.id===s); return <Tag key={s} c="blue" xs>{cl?.name}</Tag>; })}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+// ── OPORTUNIDADES ──
+const Oportunidades = () => {
+  const [active, setActive] = useState(null);
+  const qConf={
+    tl:{label:'Quick wins · Alta prioridad',bg:'rgba(11,110,79,0.07)',bd:'rgba(11,110,79,0.2)',lc:'#0B6E4F'},
+    tr:{label:'Oportunidades · Medio plazo',bg:'rgba(45,95,160,0.07)',bd:'rgba(45,95,160,0.2)',lc:'#2D5FA0'},
+    bl:{label:'Para validar · Baja inversión',bg:'rgba(196,147,58,0.06)',bd:'rgba(196,147,58,0.22)',lc:'#7A4A0A'},
+    br:{label:'Disruptivas · Largo plazo',bg:'rgba(74,26,107,0.07)',bd:'rgba(74,26,107,0.2)',lc:'#4A1A6B'},
+  };
+  return (
+    <div style={{maxWidth:960,margin:'0 auto',padding:'40px 32px 80px'}}>
+      <Eyebrow label="Bloque 04 · Oportunidades"/>
+      <div style={{fontFamily:'Syne',fontSize:26,fontWeight:700,marginBottom:8}}>Matriz impacto / esfuerzo</div>
+      <div style={{fontSize:13,color:'var(--ink3)',marginBottom:28}}>Quick wins para actuar esta semana. Disruptivas para cambiar el negocio en 3 años. Siempre ambas.</div>
+      <div style={{position:'relative',paddingLeft:40}}>
+        <div style={{position:'absolute',left:0,top:'50%',transform:'translateY(-50%) rotate(-90deg)',fontSize:10,color:'var(--ink3)',whiteSpace:'nowrap',letterSpacing:'1px',textTransform:'uppercase'}}>Mayor impacto ↑</div>
+        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:2}}>
+          {['tl','tr','bl','br'].map(q=>{
+            const cfg=qConf[q];
+            const items=OPPS.filter(o=>o.q===q);
+            return (
+              <div key={q} style={{borderRadius:8,padding:'16px',border:`0.5px solid ${cfg.bd}`,background:cfg.bg,minHeight:200}}>
+                <div style={{fontFamily:'Syne',fontSize:9,fontWeight:700,textTransform:'uppercase',letterSpacing:'1.5px',color:cfg.lc,marginBottom:12}}>{cfg.label}</div>
+                {items.map(opp=>(
+                  <div key={opp.id} onClick={()=>setActive(active===opp.id?null:opp.id)} style={{background:'var(--wh)',borderRadius:8,padding:'10px 12px',marginBottom:7,border:active===opp.id?`1px solid ${cfg.bd}`:'0.5px solid var(--bdr)',cursor:'pointer',transition:'transform 0.1s'}}
+                    onMouseEnter={e=>e.currentTarget.style.transform='translateX(2px)'}
+                    onMouseLeave={e=>e.currentTarget.style.transform='translateX(0)'}>
+                    <div style={{fontSize:8.5,fontWeight:600,textTransform:'uppercase',letterSpacing:'1px',color:cfg.lc,marginBottom:3}}>{opp.tipo}</div>
+                    <div style={{fontSize:12,fontWeight:500,color:'var(--ink)',lineHeight:1.35}}>{opp.titulo}</div>
+                    {active===opp.id&&(
+                      <div style={{marginTop:8,fontSize:11.5,color:'var(--ink2)',lineHeight:1.65,borderTop:'0.5px solid var(--bdr)',paddingTop:8}}>
+                        {opp.desc}
+                        <div style={{marginTop:6,display:'flex',flexWrap:'wrap',gap:4}}>
+                          <Tag xs>{opp.plat}</Tag>
+                          <Tag xs c="blue">{opp.segs}</Tag>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            );
+          })}
+        </div>
+        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:2,marginTop:6}}>
+          <div style={{textAlign:'center',fontSize:10,color:'var(--ink3)'}}>← Menor esfuerzo</div>
+          <div style={{textAlign:'center',fontSize:10,color:'var(--ink3)'}}>Mayor esfuerzo →</div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// ── PLATAFORMAS ──
+const Plataformas = () => {
+  const [plat, setPlat] = useState('finanzas');
+  const [openIns, setOpenIns] = useState(null);
+  const plats=[
+    {id:'finanzas',label:'Finanzas',sub:'Interbank · Sip · Financiera Oh!',c:'var(--finanzas)',headline:'El mayor territorio disponible — y el más amenazado por Credicorp. Yape ganó el pago cotidiano. El ahorro con propósito, la junta digital y el crédito sin miedo son el espacio abierto.',insIds:['i1','i2','i3','i4']},
+    {id:'retail',label:'Retail',sub:'Mass · PlazaVea · Real Plaza',c:'var(--retail)',headline:'Presencia física en el vecindario. Mass está en la rutina diaria de estas familias. El activo más diferenciador frente a Credicorp — que no tiene presencia física.',insIds:['i4','i5']},
+    {id:'salud',label:'Salud',sub:'Inkafarma · Mifarma · Clínica Aviva',c:'var(--salud)',headline:'La marca de mayor confianza del Grupo en este segmento. El driver de ahorro #1 es el miedo al gasto imprevisto en salud. Ese miedo y esa confianza apuntan al mismo lugar.',insIds:['i4','i5']},
+    {id:'edu',label:'Educación',sub:'UTP · Innova Schools · IDAT',c:'var(--edu)',headline:'La meta más intensa del segmento — y la más huérfana de instrumento. Los propios padres también tienen estudios incompletos. Hay demanda educativa propia y delegada.',insIds:['i2','i5']},
+    {id:'entret',label:'Entret.',sub:'Cineplanet · Bembos · Casa Andina',c:'var(--entret)',headline:'5/7 familias quieren salir más. 0/7 mencionaron Cineplanet espontáneamente. La barrera no es el precio — es la incertidumbre y el costo de coordinación.',insIds:['i4','i5']},
+  ];
+  const current=plats.find(p=>p.id===plat);
+  const platInsights=current.insIds.map(id=>INSIGHTS.find(i=>i.id===id)).filter(Boolean);
+  const platOpps=OPPS.filter(o=>o.plat.toLowerCase().includes(plat==='finanzas'?'interbank':plat==='edu'?'utp':plat==='salud'?'inkafarma':plat==='entret'?'cineplanet':plat));
+
+  return (
+    <div style={{maxWidth:960,margin:'0 auto',padding:'40px 32px 80px'}}>
+      <Eyebrow label="Deep Dive · Plataformas del Grupo"/>
+      <div style={{fontFamily:'Syne',fontSize:26,fontWeight:700,marginBottom:8}}>Por plataforma</div>
+      <div style={{fontSize:13,color:'var(--ink3)',marginBottom:20}}>Selecciona una plataforma para ver insights y oportunidades específicas para ese equipo.</div>
+      <div style={{display:'flex',gap:8,flexWrap:'wrap',marginBottom:20}}>
+        {plats.map(p=>(
+          <button key={p.id} onClick={()=>{setPlat(p.id);setOpenIns(null);}} style={{padding:'7px 14px',borderRadius:100,fontSize:12,fontWeight:500,border:plat===p.id?'none':'0.5px solid var(--bdr)',background:plat===p.id?p.c:'var(--wh)',color:plat===p.id?'#FAF8F5':'var(--ink3)',transition:'all 0.15s'}}>{p.label} · {p.sub}</button>
+        ))}
+      </div>
+      <div style={{borderRadius:12,padding:'22px 26px',marginBottom:14,background:current.c,color:'#FAF8F5'}}>
+        <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'2px',opacity:0.6,marginBottom:4}}>Deep dive · {current.label}</div>
+        <div style={{fontFamily:'Syne',fontSize:18,fontWeight:700,marginBottom:8}}>{current.sub}</div>
+        <div style={{fontSize:12,opacity:0.75,lineHeight:1.6}}>{current.headline}</div>
+      </div>
+      <div style={{marginBottom:16}}>
+        <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1.5px',color:'var(--ink3)',marginBottom:10}}>Insights relevantes</div>
+        <div style={{display:'flex',flexDirection:'column',gap:8}}>
+          {platInsights.map(i=>(
+            <div key={i.id} style={{background:'var(--wh)',border:'0.5px solid var(--bdr)',borderRadius:10,overflow:'hidden'}}>
+              <div onClick={()=>setOpenIns(openIns===i.id?null:i.id)} style={{padding:'12px 16px',borderBottom:openIns===i.id?'0.5px solid var(--bdr)':undefined,background:'var(--bg)',display:'flex',alignItems:'center',gap:10,cursor:'pointer'}}>
+                <div style={{fontSize:10,fontWeight:600,color:'var(--ink3)',minWidth:20}}>{i.num}</div>
+                <div style={{fontSize:13,fontWeight:500,color:'var(--ink)',flex:1,fontStyle:'italic'}}>"{i.title}"</div>
+                <Tag xs>{i.conf}</Tag>
+                <div style={{fontSize:14,color:'var(--ink3)',transition:'transform 0.2s',transform:openIns===i.id?'rotate(180deg)':'none'}}>⌄</div>
+              </div>
+              {openIns===i.id&&(
+                <div style={{padding:'14px 16px'}}>
+                  <div style={{fontSize:12,color:'var(--ink2)',lineHeight:1.65,marginBottom:8}}>{i.desc}</div>
+                  {i.quotes.map((q,qi)=>(
+                    <div key={qi} style={{borderLeft:'2px solid var(--gold)',padding:'4px 10px',fontStyle:'italic',fontSize:11,color:'var(--ink3)',background:'rgba(196,147,58,0.04)',borderRadius:'0 4px 4px 0',marginBottom:6}}>{q}</div>
+                  ))}
+                  <div style={{padding:'9px 12px',background:'rgba(196,147,58,0.06)',borderLeft:'3px solid var(--gold)',borderRadius:'0 6px 6px 0',marginTop:8}}>
+                    <div style={{fontSize:8.5,fontWeight:600,textTransform:'uppercase',letterSpacing:'1px',color:'var(--gold)',marginBottom:3}}>Deeper truth</div>
+                    <div style={{fontSize:12,color:'var(--ink2)',lineHeight:1.6}}>{i.deeper}</div>
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+      {platOpps.length>0&&(
+        <div>
+          <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1.5px',color:'var(--ink3)',marginBottom:10}}>Oportunidades para esta plataforma</div>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(2,1fr)',gap:8}}>
+            {platOpps.map(o=>(
+              <div key={o.id} style={{background:'var(--wh)',border:'0.5px solid var(--bdr)',borderRadius:10,padding:'14px 16px'}}>
+                <div style={{fontSize:8.5,fontWeight:600,textTransform:'uppercase',letterSpacing:'1px',color:'var(--gold)',marginBottom:4}}>{o.tipo}</div>
+                <div style={{fontSize:13,fontWeight:500,color:'var(--ink)',marginBottom:6,lineHeight:1.3}}>{o.titulo}</div>
+                <div style={{fontSize:11.5,color:'var(--ink2)',lineHeight:1.6,marginBottom:8}}>{o.desc}</div>
+                <Tag xs>{o.segs}</Tag>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+// ── APP ──
+const VIEWS=[{id:'overview',label:'Inicio'},{id:'segmentos',label:'Segmentos'},{id:'metas',label:'Metas y sueños'},{id:'insights',label:'Insights'},{id:'oportunidades',label:'Oportunidades'},{id:'plataformas',label:'Deep dive'}];
+
+const App=()=>{
+  const [view, setView]=useState('overview');
+  const renderView=()=>{
+    switch(view){
+      case 'overview': return <Overview go={setView}/>;
+      case 'segmentos': return <Segmentos/>;
+      case 'metas': return <Metas/>;
+      case 'insights': return <Insights/>;
+      case 'oportunidades': return <Oportunidades/>;
+      case 'plataformas': return <Plataformas/>;
+      default: return <Overview go={setView}/>;
+    }
+  };
+  return (
+    <div>
+      <nav style={{position:'sticky',top:0,zIndex:100,background:'rgba(247,245,241,0.96)',backdropFilter:'blur(12px)',borderBottom:'0.5px solid var(--bdr)',padding:'0 32px',display:'flex',alignItems:'center',gap:0,height:52}}>
+        <div style={{fontFamily:'Syne',fontSize:11,fontWeight:600,letterSpacing:'2px',textTransform:'uppercase',color:'var(--gold)',marginRight:24,whiteSpace:'nowrap',cursor:'pointer'}} onClick={()=>setView('overview')}>
+          LVL <span style={{color:'var(--ink3)'}}>×</span> Intercorp
+        </div>
+        <div style={{display:'flex',gap:0,flex:1,overflowX:'auto'}}>
+          {VIEWS.map(v=>(
+            <button key={v.id} onClick={()=>setView(v.id)} style={{fontSize:12,fontWeight:400,color:view===v.id?'var(--ink)':'var(--ink3)',padding:'0 14px',height:52,background:'none',border:'none',borderBottom:view===v.id?'2px solid var(--gold)':'2px solid transparent',transition:'all 0.15s',whiteSpace:'nowrap'}}>{v.label}</button>
+          ))}
+        </div>
+        <button onClick={()=>setView('plataformas')} style={{marginLeft:'auto',fontSize:11,fontWeight:600,background:'var(--ink)',color:'#FAF8F5',padding:'6px 14px',borderRadius:6,border:'none',transition:'opacity 0.15s',whiteSpace:'nowrap'}}>Ver plataformas →</button>
+      </nav>
+      {renderView()}
+    </div>
+  );
+};
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
