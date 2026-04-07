@@ -189,7 +189,7 @@ const Overview = ({go}) => (
       <div style={{fontFamily:'Syne',fontSize:10,fontWeight:600,letterSpacing:'2px',textTransform:'uppercase',color:'var(--gold)',marginBottom:16}}>La Victoria Lab × Intercorp · Lima 2025</div>
       <div style={{fontFamily:'Syne',fontSize:44,fontWeight:800,color:'#FAF8F5',lineHeight:1.05,marginBottom:18}}>Familias Peruanas</div>
       <div style={{fontSize:14,color:'rgba(250,248,245,0.5)',lineHeight:1.8,maxWidth:560,marginBottom:32}}>
-        Una investigación continua sobre cómo viven, deciden y consumen las familias de clase media peruana a lo largo de 6 etapas del ciclo de vida familiar.
+        Una investigación continua sobre cómo vive, decide y consume la clase media peruana a lo largo de 6 etapas del ciclo de vida familiar. NSE C · Lima Metropolitana.
       </div>
 
       {/* Etapas strip */}
@@ -247,7 +247,7 @@ const Overview = ({go}) => (
     <div style={{fontFamily:'Syne',fontSize:22,fontWeight:700,marginBottom:20}}>¿Por dónde quieres empezar?</div>
     <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:12}}>
       {[
-        {id:'etapas',icon:'◌',title:'Etapas de vida',desc:'Los 6 segmentos del proyecto. Definición, tamaño estimado y datos públicos de cada uno.',c:'#3A3830'},
+        {id:'journey',icon:'◈',title:'Journey & Lifetime Value',desc:'Hitos, emociones y valor acumulado para Intercorp por cada etapa del ciclo de vida.',c:'#C45A00'},
         {id:'segmentos',icon:'◉',title:'Segmentos motivacionales',desc:'Los 3 clusters de la encuesta. Quiénes son, qué los mueve, cómo difieren.',c:'var(--gold)'},
         {id:'metas',icon:'◎',title:'Metas y sueños',desc:'Las 6 metas del campo, qué dice la investigación, y por qué el gap persiste.',c:'#2D5FA0'},
         {id:'insights',icon:'◆',title:'Insights × Plataformas',desc:'Heatmap de impacto: cómo cada hallazgo afecta cada vertical del Grupo.',c:'#0B6E4F'},
@@ -1169,8 +1169,180 @@ const Chat=()=>{
   );
 };
 
+// ── JOURNEY ──
+const JOURNEY_DATA = {
+  joven:{nombre:'Joven Independiente',def:'Sin pareja, sin hijos, autónomo, < 40 años',color:'#C4933A',
+    hitos:[
+      {tipo:'celebración',titulo:'Primer sueldo propio',desc:'Sale del hogar de origen. La independencia económica es una mezcla de orgullo y vértigo. Primer contacto con el sistema financiero formal.',emociones:['Euforia','Orgullo','Vértigo','Soledad nueva'],intercorp:'Sip: primera billetera · Cineplanet: salidas · UTP/IDAT: estudios'},
+      {tipo:'celebración',titulo:'Primera compra grande propia',desc:'El primer teléfono, laptop o moto con plata ganada. Materializa la autonomía.',emociones:['Satisfacción','Logro personal'],intercorp:'Sip: pago en cuotas · IziPay'},
+      {tipo:'dificultad',titulo:'Fin de mes ajustado',desc:'El sueldo no alcanza. La inflación, el alquiler y los gastos básicos consumen todo. El ahorro no existe todavía.',emociones:['Ansiedad','Frustración','Vergüenza'],intercorp:'Sip/Interbank: crédito de consumo pequeño'},
+      {tipo:'transición',titulo:'Primera relación estable',desc:'El ciclo de vida empieza a compartirse. Surge la pregunta de convivencia y el futuro en común.',emociones:['Ilusión','Incertidumbre','Felicidad'],intercorp:'Casa Andina: viajes · Cineplanet'},
+    ],
+    ltv:{total:'S/ 85,000',duracion:'~8 años',items:[{plat:'Sip/IziPay',val:'S/ 18K',pct:21},{plat:'Interbank',val:'S/ 14K',pct:16},{plat:'Cineplanet',val:'S/ 9K',pct:11},{plat:'UTP/IDAT',val:'S/ 28K',pct:33},{plat:'Inkafarma',val:'S/ 7K',pct:8},{plat:'Bembos/Mass',val:'S/ 9K',pct:11}]},
+  },
+  pareja:{nombre:'Pareja Sin Hijos',def:'Con pareja, sin hijos, < 45 años',color:'#2D5FA0',
+    hitos:[
+      {tipo:'celebración',titulo:'Convivencia o matrimonio',desc:'El hogar se consolida. Dos ingresos, nuevas responsabilidades compartidas. El primer gran proyecto conjunto.',emociones:['Amor','Proyecto compartido','Nerviosismo'],intercorp:'Real Plaza: hogar · Promart · IziPay'},
+      {tipo:'celebración',titulo:'Primer viaje juntos',desc:'Vacaciones como pareja — la inversión emocional más visible de esta etapa.',emociones:['Alegría','Libertad','Conexión'],intercorp:'Casa Andina · Cineplanet'},
+      {tipo:'dificultad',titulo:'Primer gran crédito',desc:'Departamento o auto. La deuda más grande que han contraído. Genera orgullo y ansiedad simultáneamente.',emociones:['Logro','Ansiedad financiera','Compromiso'],intercorp:'Interbank: crédito hipotecario · Sip'},
+      {tipo:'transición',titulo:'Decisión de tener hijos',desc:'El debate más grande de esta etapa. Implica replantear ingresos, tiempo y proyecto de vida.',emociones:['Ilusión','Miedo','Expectativa'],intercorp:'Inkafarma: salud reproductiva · Clínica Aviva'},
+    ],
+    ltv:{total:'S/ 145,000',duracion:'~7 años',items:[{plat:'Sip/IziPay',val:'S/ 32K',pct:22},{plat:'Interbank',val:'S/ 48K',pct:33},{plat:'Casa Andina',val:'S/ 18K',pct:12},{plat:'Promart/Real Plaza',val:'S/ 24K',pct:17},{plat:'Inkafarma',val:'S/ 10K',pct:7},{plat:'Cineplanet',val:'S/ 13K',pct:9}]},
+  },
+  'familiar-joven':{nombre:'Familia Joven',def:'Pareja con hijos menores de 6 años',color:'#0B6E4F',
+    hitos:[
+      {tipo:'celebración',titulo:'Nacimiento del primer hijo',desc:'El momento más transformador. La identidad de la pareja cambia para siempre. Alegría y agotamiento simultáneos.',emociones:['Amor intenso','Agotamiento','Asombro','Miedo'],intercorp:'Inkafarma: medicamentos y cuidado · Clínica Aviva'},
+      {tipo:'dificultad',titulo:'Noches sin dormir y pérdida del tiempo propio',desc:'El cuidado intensivo bloquea el trabajo, el estudio y el ocio. Sin red de cuidado, todo lo demás se detiene.',emociones:['Agotamiento extremo','Culpa','Amor incondicional'],intercorp:'Mass: abastecimiento rápido · Sip'},
+      {tipo:'dificultad',titulo:'Primera emergencia de salud del hijo',desc:'Fiebre a las 9pm, urgencias sin atención rápida, gastos imprevistos. El mayor miedo financiero del segmento.',emociones:['Terror','Impotencia','Alivio posterior'],intercorp:'Inkafarma urgencias · Clínica Aviva · Interseguro'},
+      {tipo:'celebración',titulo:'Primera salida familiar',desc:'El primer cine, el primer restaurante con el bebé. Requiere planificación intensa pero tiene carga emocional altísima.',emociones:['Orgullo familiar','Alegría','Logro'],intercorp:'Cineplanet · Bembos · Real Plaza'},
+      {tipo:'transición',titulo:'Hijo empieza nido o guardería',desc:'La madre puede retomar trabajo o estudios parcialmente. Primer contacto con el sistema educativo.',emociones:['Alivio','Separación dolorosa','Esperanza'],intercorp:'Innova Schools · UTP (madre retoma estudios)'},
+    ],
+    ltv:{total:'S/ 220,000',duracion:'~6 años',items:[{plat:'Sip/IziPay',val:'S/ 44K',pct:20},{plat:'Interbank',val:'S/ 52K',pct:24},{plat:'Inkafarma/Salud',val:'S/ 38K',pct:17},{plat:'Mass/PlazaVea',val:'S/ 42K',pct:19},{plat:'Innova/UTP',val:'S/ 28K',pct:13},{plat:'Cineplanet/Entret.',val:'S/ 16K',pct:7}]},
+  },
+  'familiar-exp':{nombre:'Familia con Experiencia',def:'Hijos 6–25 años viviendo en casa',color:'#5B3FA0',
+    hitos:[
+      {tipo:'celebración',titulo:'Hijo entra al colegio',desc:'Nuevo sistema de gastos regulares y ritmo familiar. La educación se convierte en el mayor ítem de gasto mensual.',emociones:['Orgullo','Preocupación por el futuro','Nostalgia'],intercorp:'Innova Schools · UTP padres · Inkafarma'},
+      {tipo:'dificultad',titulo:'Adolescencia del hijo',desc:'Conflictos de identidad, gastos que escalan, menos control parental. Uno de los períodos más tensos del ciclo familiar.',emociones:['Tensión','Amor frustrado','Incertidumbre'],intercorp:'Cineplanet · Inkafarma · Bembos'},
+      {tipo:'celebración',titulo:'Graduación del hijo',desc:'El hito más celebrado de la etapa. El esfuerzo de años se materializa en un momento de orgullo colectivo.',emociones:['Orgullo extremo','Emoción','Nostalgia'],intercorp:'Casa Andina: celebración · Cineplanet'},
+      {tipo:'transición',titulo:'Hijo entra a la universidad',desc:'El mayor gasto en 20 años se activa. Si no hay ahorro acumulado, la deuda educativa comienza.',emociones:['Ilusión','Ansiedad financiera','Esperanza'],intercorp:'UTP/IDAT: matrícula · Interbank: crédito educativo'},
+    ],
+    ltv:{total:'S/ 310,000',duracion:'~15 años',items:[{plat:'Sip/IziPay',val:'S/ 58K',pct:19},{plat:'Interbank',val:'S/ 72K',pct:23},{plat:'UTP/Innova',val:'S/ 88K',pct:28},{plat:'Inkafarma/Salud',val:'S/ 42K',pct:14},{plat:'Mass/PlazaVea',val:'S/ 32K',pct:10},{plat:'Cineplanet/Entret.',val:'S/ 18K',pct:6}]},
+  },
+  nido:{nombre:'Nido Vacío',def:'Pareja 40–64 años, hijos > 18 fuera del hogar',color:'#8B2000',
+    hitos:[
+      {tipo:'transición',titulo:'El último hijo se va de casa',desc:'La casa queda en silencio. La pareja se redescubre. Puede ser liberador o desorientador — a veces los dos.',emociones:['Libertad','Vacío','Redescubrimiento'],intercorp:'Casa Andina: viajes · Cineplanet · Bembos'},
+      {tipo:'celebración',titulo:'Primer viaje de pareja solos en años',desc:'Recuperan el tiempo y la identidad de pareja. El consumo de ocio aumenta significativamente.',emociones:['Alegría','Conexión recuperada','Gratitud'],intercorp:'Casa Andina · Real Plaza · Cineplanet'},
+      {tipo:'dificultad',titulo:'Primera enfermedad crónica',desc:'La salud empieza a ser protagonista. Los gastos médicos escalan y la incertidumbre pensional se vuelve real.',emociones:['Vulnerabilidad','Miedo','Aceptación'],intercorp:'Clínica Aviva · Inkafarma · Interseguro'},
+      {tipo:'transición',titulo:'Planificación de la jubilación',desc:'La AFP genera desconfianza. El ahorro informal ha sido la estrategia principal. Ahora la ventana se cierra.',emociones:['Ansiedad','Arrepentimiento','Resignación'],intercorp:'Interbank: ahorro/jubilación · Interseguro'},
+    ],
+    ltv:{total:'S/ 195,000',duracion:'~20 años',items:[{plat:'Sip/IziPay',val:'S/ 38K',pct:19},{plat:'Interbank/Interseguro',val:'S/ 62K',pct:32},{plat:'Inkafarma/Salud',val:'S/ 52K',pct:27},{plat:'Casa Andina/Entret.',val:'S/ 28K',pct:14},{plat:'Mass/PlazaVea',val:'S/ 15K',pct:8}]},
+  },
+  adulto:{nombre:'Adulto Mayor',def:'65+ años, jubilado o dependiente',color:'#3A3830',
+    hitos:[
+      {tipo:'transición',titulo:'Jubilación',desc:'Fin de la vida laboral activa. El ingreso cae, los hábitos cambian, la identidad se reconfigura.',emociones:['Alivio','Pérdida de identidad','Incertidumbre'],intercorp:'Inkafarma · Interseguro · Clínica Aviva'},
+      {tipo:'celebración',titulo:'Primer nieto',desc:'El evento emocional más importante de esta etapa. Reactiva el rol familiar y da nuevo propósito.',emociones:['Alegría extrema','Vitalidad renovada','Amor'],intercorp:'Mass · Inkafarma · Cineplanet'},
+      {tipo:'dificultad',titulo:'Dependencia creciente',desc:'La familia se convierte en el principal soporte. La soledad y la dependencia son las tensiones centrales.',emociones:['Vulnerabilidad','Gratitud','Miedo a ser carga'],intercorp:'Inkafarma domicilio · Clínica Aviva · Interseguro'},
+    ],
+    ltv:{total:'S/ 120,000',duracion:'~15 años',items:[{plat:'Inkafarma/Salud',val:'S/ 58K',pct:48},{plat:'Interseguro',val:'S/ 32K',pct:27},{plat:'Mass/PlazaVea',val:'S/ 18K',pct:15},{plat:'Interbank pensión',val:'S/ 12K',pct:10}]},
+  },
+};
+
+const TIPO_STYLE={'celebración':{bg:'rgba(11,110,79,0.1)',c:'#0B5E3A'},'dificultad':{bg:'rgba(139,32,0,0.08)',c:'#8B2000'},'transición':{bg:'rgba(45,95,160,0.1)',c:'#1A3A6B'}};
+
+const Journey=()=>{
+  const [active, setActive]=useState('joven');
+  const d=JOURNEY_DATA[active];
+  const ids=Object.keys(JOURNEY_DATA);
+  return (
+    <div style={{maxWidth:960,margin:'0 auto',padding:'40px 32px 80px'}}>
+      <Eyebrow label="El journey · Ciclo de vida familiar"/>
+      <div style={{fontFamily:'Syne',fontSize:26,fontWeight:700,marginBottom:8}}>Hitos, emociones y valor para Intercorp</div>
+      <div style={{fontSize:13,color:'var(--ink3)',marginBottom:24}}>Los momentos más importantes de cada etapa — celebraciones, dificultades y transiciones — y cuánto vale cada etapa para el ecosistema del Grupo.</div>
+
+      {/* Selector */}
+      <div style={{display:'flex',gap:6,flexWrap:'wrap',marginBottom:20}}>
+        {ids.map(id=>{
+          const dd=JOURNEY_DATA[id];
+          return <button key={id} onClick={()=>setActive(id)} style={{padding:'6px 13px',borderRadius:100,fontSize:11,fontWeight:500,border:active===id?'none':'0.5px solid var(--bdr)',background:active===id?dd.color:'var(--wh)',color:active===id?'#FAF8F5':'var(--ink3)',transition:'all 0.15s'}}>{dd.nombre}</button>;
+        })}
+      </div>
+
+      {/* Header */}
+      <div style={{display:'flex',alignItems:'stretch',gap:0,padding:'16px 20px',borderRadius:12,border:`1.5px solid ${d.color}22`,background:'var(--wh)',marginBottom:16}}>
+        <div style={{width:4,borderRadius:2,background:d.color,flexShrink:0,marginRight:16}}/>
+        <div>
+          <div style={{fontFamily:'Syne',fontSize:17,fontWeight:600,marginBottom:2}}>{d.nombre}</div>
+          <div style={{fontSize:12,color:'var(--ink3)',fontStyle:'italic'}}>{d.def}</div>
+        </div>
+      </div>
+
+      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:16,alignItems:'start'}}>
+        {/* Hitos */}
+        <div>
+          <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1.5px',color:'var(--ink3)',marginBottom:14}}>Hitos del ciclo de vida</div>
+          <div style={{position:'relative',paddingLeft:26}}>
+            <div style={{position:'absolute',left:9,top:0,bottom:0,width:'1.5px',background:'var(--bdr)'}}/>
+            {d.hitos.map((h,i)=>{
+              const ts=TIPO_STYLE[h.tipo]||TIPO_STYLE.transición;
+              return (
+                <div key={i} style={{position:'relative',marginBottom:14}}>
+                  <div style={{position:'absolute',left:-21,top:4,width:12,height:12,borderRadius:'50%',background:d.color,border:'2px solid var(--wh)'}}/>
+                  <div style={{background:'var(--wh)',border:'0.5px solid var(--bdr)',borderRadius:10,padding:'12px 14px'}}>
+                    <div style={{display:'flex',alignItems:'flex-start',gap:8,marginBottom:6}}>
+                      <span style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'0.5px',padding:'2px 7px',borderRadius:100,background:ts.bg,color:ts.c,flexShrink:0,marginTop:2}}>{h.tipo}</span>
+                      <div style={{fontSize:12,fontWeight:500,lineHeight:1.3}}>{h.titulo}</div>
+                    </div>
+                    <div style={{fontSize:11.5,color:'var(--ink2)',lineHeight:1.6,marginBottom:8}}>{h.desc}</div>
+                    <div style={{display:'flex',gap:4,flexWrap:'wrap',marginBottom:6}}>
+                      {h.emociones.map((e,j)=><span key={j} style={{fontSize:10,padding:'2px 7px',borderRadius:100,border:'0.5px solid var(--bdr)',color:'var(--ink3)'}}>{e}</span>)}
+                    </div>
+                    <div style={{fontSize:10,color:'var(--ink3)',borderTop:'0.5px solid var(--bdr2)',paddingTop:5,display:'flex',alignItems:'center',gap:5}}>
+                      <div style={{width:6,height:6,borderRadius:'50%',background:'var(--gold)',flexShrink:0}}/>
+                      {h.intercorp}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* LTV + Emociones */}
+        <div style={{display:'flex',flexDirection:'column',gap:12}}>
+          {/* LTV */}
+          <div style={{background:'var(--wh)',border:'0.5px solid var(--bdr)',borderRadius:12,padding:'18px 20px'}}>
+            <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1.5px',color:'var(--ink3)',marginBottom:12}}>Household lifetime value · Intercorp</div>
+            <div style={{fontFamily:'Syne',fontSize:30,fontWeight:700,color:d.color,lineHeight:1,marginBottom:3}}>{d.ltv.total}</div>
+            <div style={{fontSize:11,color:'var(--ink3)',marginBottom:16}}>estimado acumulado · {d.ltv.duracion}</div>
+            <div style={{display:'flex',flexDirection:'column',gap:7}}>
+              {d.ltv.items.map((item,i)=>(
+                <div key={i} style={{display:'flex',alignItems:'center',gap:10}}>
+                  <div style={{fontSize:11,color:'var(--ink3)',width:120,flexShrink:0,textAlign:'right'}}>{item.plat}</div>
+                  <div style={{flex:1,height:7,background:'var(--bg2)',borderRadius:4,overflow:'hidden'}}>
+                    <div style={{height:'100%',width:`${item.pct}%`,background:d.color,borderRadius:4}}/>
+                  </div>
+                  <div style={{fontSize:11,fontWeight:500,color:'var(--ink2)',width:46,flexShrink:0}}>{item.val}</div>
+                </div>
+              ))}
+            </div>
+            <div style={{marginTop:14,paddingTop:10,borderTop:'0.5px solid var(--bdr)',fontSize:10,color:'var(--ink3)',lineHeight:1.6}}>
+              Estimados indicativos basados en gasto promedio NSE C (APEIM 2023) × duración de etapa. Asumen máxima penetración del ecosistema — no participación de mercado real.
+            </div>
+          </div>
+
+          {/* Total ciclo */}
+          <div style={{background:'#0A0908',borderRadius:12,padding:'16px 18px'}}>
+            <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1.5px',color:'rgba(250,248,245,0.4)',marginBottom:10}}>Valor total · ciclo de vida completo</div>
+            <div style={{fontFamily:'Syne',fontSize:28,fontWeight:700,color:'var(--gold)',lineHeight:1,marginBottom:4}}>S/ 1,075,000</div>
+            <div style={{fontSize:11,color:'rgba(250,248,245,0.45)',lineHeight:1.65}}>
+              Lo que representa una familia peruana NSE C para el ecosistema de Intercorp desde que es Joven Independiente hasta Adulto Mayor — si el Grupo está presente en cada etapa.
+            </div>
+          </div>
+
+          {/* Emociones dominantes */}
+          <div style={{background:'var(--wh)',border:'0.5px solid var(--bdr)',borderRadius:12,padding:'16px 18px'}}>
+            <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1.5px',color:'var(--ink3)',marginBottom:12}}>Emociones dominantes de esta etapa</div>
+            <div style={{display:'flex',flexDirection:'column',gap:7}}>
+              {d.hitos.flatMap(h=>h.emociones.slice(0,2).map(e=>({e,tipo:h.tipo}))).filter((x,i,a)=>a.findIndex(y=>y.e===x.e)===i).slice(0,5).map(({e,tipo},i)=>{
+                const ts=TIPO_STYLE[tipo]||TIPO_STYLE.transición;
+                return (
+                  <div key={i} style={{display:'flex',alignItems:'center',gap:8}}>
+                    <div style={{width:8,height:8,borderRadius:'50%',flexShrink:0,background:ts.bg,border:`1.5px solid ${ts.c}`}}/>
+                    <span style={{fontSize:12}}>{e}</span>
+                    <span style={{fontSize:10,color:'var(--ink3)',marginLeft:'auto'}}>{tipo}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // ── APP ──
-const VIEWS=[{id:'overview',label:'Inicio'},{id:'etapas',label:'Etapas de vida'},{id:'segmentos',label:'Segmentos'},{id:'metas',label:'Metas y sueños'},{id:'insights',label:'Insights'},{id:'oportunidades',label:'Oportunidades'},{id:'plataformas',label:'Deep dive'}];
+const VIEWS=[{id:'overview',label:'Inicio'},{id:'etapas',label:'Etapas de vida'},{id:'journey',label:'Journey'},{id:'segmentos',label:'Segmentos'},{id:'metas',label:'Metas y sueños'},{id:'insights',label:'Insights'},{id:'oportunidades',label:'Oportunidades'},{id:'plataformas',label:'Deep dive'}];
 
 const App=()=>{
   const [view, setView]=useState('overview');
@@ -1178,6 +1350,7 @@ const App=()=>{
     switch(view){
       case 'overview': return <Overview go={setView}/>;
       case 'etapas': return <EtapasVida/>;
+      case 'journey': return <Journey/>;
       case 'segmentos': return <Segmentos/>;
       case 'metas': return <Metas/>;
       case 'insights': return <Insights/>;
