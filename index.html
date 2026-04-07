@@ -114,6 +114,203 @@ const INSIGHTS = [
     segs:['arquitectos','inversionistas']},
 ];
 
+// ── SIZING MODEL ──
+// Bottom-up desde APEIM 2023 NSE C Lima Met.
+// Gasto NSE C Lima: S/ 3,700/mes hogar (APEIM 2023) = S/ 44,400/año
+// Hogares NSE C Lima: ~1,550,000 (48% × 3.36M hogares)
+// Mercado total NSE C Lima = 1.55M × S/ 44,400 = ~S/ 68,820M/año
+// Nota: Participación del mercado de Intercorp estimada por analogía de sector y posición competitiva
+// Todos los valores en millones de soles anuales
+
+const SIZING = [
+  {
+    id:'o1',
+    titulo:'Cuenta con propósito',
+    plat:'Interbank + Sip + UTP',
+    color:'#0B6E4F',
+    tipo:'Quick win',
+    metodologia:[
+      '1.55M hogares NSE C Lima × 41% que ahorra en banco = 635K hogares con cuenta activa',
+      'Ahorro promedio NSE C: S/ 300/mes × 12 = S/ 3,600/año',
+      'Mercado de ahorro formal NSE C Lima: 635K × S/ 3,600 = S/ 2,286M/año',
+      'Share capturado por Interbank hoy: ~25% (banco challenger en NSE C)',
+      'Upside con cuenta propósito: +15pp de share adicional por diferenciación + retención',
+    ],
+    mercadoTotal: 2286,
+    shareActual: 25,
+    shareTarget: 40,
+    oportunidad: 343,
+    tam: 'S/ 2,286M',
+    sam: 'S/ 915M',
+    som: 'S/ 343M',
+    tamLabel:'Mercado ahorro formal NSE C Lima',
+    samLabel:'Share alcanzable Interbank (40%)',
+    somLabel:'Upside incremental con cuenta propósito',
+    supuestos:'Gasto NSE C APEIM 2023 · Tasa de ahorro ENAHO · Share bancario estimado por posición competitiva de Interbank vs BCP/Scotiabank en NSE C',
+    palanca:'Si el 15% adicional de ahorradores activos adopta la cuenta propósito, el upside anual es S/ 343M en depósitos, más el upside en retención y cross-sell hacia crédito educativo.',
+  },
+  {
+    id:'o2',
+    titulo:'Crédito de propósito fijo',
+    plat:'Sip → Interbank',
+    color:'#8B2000',
+    tipo:'Adjacent',
+    metodologia:[
+      '1.55M hogares NSE C × 58% con deuda activa = 899K hogares con crédito',
+      'De estos, ~40% usa crédito informal (familiar, junta) = 360K sin producto bancario formal',
+      'Crédito promedio propósito fijo estimado: S/ 2,500 (laptop, electrodoméstico, emergencia)',
+      'Mercado potencial crédito propósito fijo NSE C: 360K × S/ 2,500 = S/ 900M',
+      'Interbank puede capturar ~20% de este mercado como first-mover (plazo 3 años)',
+    ],
+    mercadoTotal: 900,
+    shareActual: 0,
+    shareTarget: 20,
+    oportunidad: 180,
+    tam: 'S/ 900M',
+    sam: 'S/ 360M',
+    som: 'S/ 180M',
+    tamLabel:'Mercado crédito informal NSE C Lima',
+    samLabel:'Crédito propósito fijo accesible (Sip como historial)',
+    somLabel:'Captura Interbank en 3 años (first-mover)',
+    supuestos:'Dato de deuda activa (58%) de encuesta FP · Participación informal estimada 40% del total deuda NSE C · Ticket promedio S/ 2,500 basado en bienes durables NSE C',
+    palanca:'Intercorp ya tiene el historial de comportamiento en Sip. Credicorp no. Ese activo vale exactamente lo que vale este mercado — S/ 180M capturables sin construir infraestructura nueva.',
+  },
+  {
+    id:'o3',
+    titulo:'Consulta médica express en Inkafarma',
+    plat:'Inkafarma + Clínica Aviva',
+    color:'#2D5FA0',
+    tipo:'Adjacent',
+    metodologia:[
+      'Gasto salud NSE C Lima: 4% del gasto total = S/ 1,776/año/hogar',
+      'Mercado total salud privada NSE C Lima: 1.55M × S/ 1,776 = S/ 2,752M/año',
+      'Del gasto en salud, ~35% es consulta ambulatoria (resto: medicamentos, hospitalización)',
+      'Mercado consulta ambulatoria NSE C Lima: ~S/ 963M/año',
+      'Inkafarma tiene ~1,200 locales Perú. En Lima NSE C, penetración ~70% de hogares',
+      'Modelo Farmacias del Ahorro México: 25-30% del gasto ambulatorio capturado en 5 años',
+    ],
+    mercadoTotal: 963,
+    shareActual: 8,
+    shareTarget: 25,
+    oportunidad: 163,
+    tam: 'S/ 963M',
+    sam: 'S/ 674M',
+    som: 'S/ 163M',
+    tamLabel:'Mercado consulta ambulatoria NSE C Lima',
+    samLabel:'Accesible por cobertura Inkafarma (70% hogares)',
+    somLabel:'Captura realista en 5 años (benchmark LATAM)',
+    supuestos:'Distribución gasto salud APEIM 2020 · Benchmark Farmacias del Ahorro México (Operadora de Farmacias, 2022) · Cobertura Inkafarma estimada por densidad de locales Lima',
+    palanca:'El modelo está probado en LATAM. La barrera no es técnica — es de decisión. Inkafarma tiene la confianza y la ubicación. Clínica Aviva tiene los médicos. La integración vale S/ 163M.',
+  },
+  {
+    id:'o4',
+    titulo:'Pack Sábado Familiar',
+    plat:'Cineplanet + Bembos + Sip',
+    color:'#C45A00',
+    tipo:'Para validar',
+    metodologia:[
+      'Gasto recreación NSE C Lima: 5% del gasto total = S/ 2,220/año/hogar',
+      'Gasto en cine NSE C: ~S/ 350/año/familia que asiste (~2.5 visitas × S/ 140)',
+      'Hogares NSE C que van al cine: ~35% = 543K hogares',
+      'Mercado cine NSE C Lima: 543K × S/ 350 = S/ 190M/año',
+      'Pack aumenta ticket medio en 40% (+ comida Bembos) y frecuencia en 20%',
+      'Mercado ampliado con pack: S/ 190M × 1.4 × 1.2 = S/ 319M',
+    ],
+    mercadoTotal: 319,
+    shareActual: 65,
+    shareTarget: 75,
+    oportunidad: 79,
+    tam: 'S/ 319M',
+    sam: 'S/ 239M',
+    som: 'S/ 79M',
+    tamLabel:'Mercado ocio familiar (cine + F&B) NSE C Lima',
+    samLabel:'Cineplanet share actual NSE C (~65% del mercado cine)',
+    somLabel:'Upside por pack (ticket +40% + frecuencia +20%)',
+    supuestos:'Gasto recreación APEIM 2023 · Penetración cine NSE C estimada (encuesta FP: 0/7 mencionaron Cineplanet espontáneamente = subpenetración actual) · Modelo pack similar a AMC + Shake Shack EEUU',
+    palanca:'La señal más clara: 0/7 mencionaron Cineplanet espontáneamente. El mercado existe — Intercorp no lo está capturando. El pack reduce la fricción de decisión y aumenta el ticket en un producto que ya tienen.',
+  },
+  {
+    id:'o5',
+    titulo:'La junta digital',
+    plat:'Interbank + Sip',
+    color:'#5B3FA0',
+    tipo:'Net-new · Disruptiva',
+    metodologia:[
+      '7% declara junta activa hoy = ~108K hogares NSE C Lima en junta formal',
+      'Estimado de participación histórica o latente: ~25% = 388K hogares',
+      'Monto promedio junta NSE C: S/ 500/mes × 10 meses = S/ 5,000/ciclo',
+      'Mercado juntas NSE C Lima (participantes activos/latentes): 388K × S/ 5,000 = S/ 1,940M',
+      'Interbank como garantizador cobra fee de servicio ~1.5% = S/ 29M/año en fee directo',
+      'Más valioso: los depósitos asociados = 388K × S/ 5,000 × 12 meses en cuentas = S/ 1,940M activos',
+    ],
+    mercadoTotal: 1940,
+    shareActual: 0,
+    shareTarget: 15,
+    oportunidad: 291,
+    tam: 'S/ 1,940M',
+    sam: 'S/ 582M',
+    som: 'S/ 291M',
+    tamLabel:'Mercado juntas (formal + informal) NSE C Lima',
+    samLabel:'Accesible en 5 años (usuarios Sip como punto de entrada)',
+    somLabel:'Depósitos capturables + fee de servicio',
+    supuestos:'7% junta activa declarada (encuesta FP n=278) extrapolado a universo NSE C · Ticket promedio junta NSE C Lima (estimado de campo y literatura microfinanzas Perú) · Sin precedente directo — primer mover gana el mercado entero',
+    palanca:'No hay ningún banco peruano que haya digitalizado la junta. El que lo haga primero no tiene competidor. El mercado es S/ 1,940M que hoy opera sin infraestructura bancaria.',
+  },
+  {
+    id:'o6',
+    titulo:'Cuidado infantil por horas',
+    plat:'LVL · A definir por el Grupo',
+    color:'#3A3830',
+    tipo:'Net-new · Disruptiva',
+    metodologia:[
+      '4/7 = ~57% de familias jóvenes NSE C sin red de cuidado activa',
+      'Hogares Familia Joven NSE C Lima: ~310K × 57% = 177K hogares sin cobertura',
+      'Gasto promedio dispuesto en cuidado por horas: S/ 15/hora × 4 horas × 2 veces/semana × 48 semanas = S/ 5,760/año',
+      'Mercado potencial cuidado infantil por horas NSE C Lima: 177K × S/ 5,760 = S/ 1,019M/año',
+      'Captura realista en fase 1 (5 años, penetración gradual): 10% = S/ 102M',
+      'Beneficio indirecto en ecosistema (consumo desbloqueado): estimado 3× el gasto directo',
+    ],
+    mercadoTotal: 1019,
+    shareActual: 0,
+    shareTarget: 10,
+    oportunidad: 102,
+    tam: 'S/ 1,019M',
+    sam: 'S/ 306M',
+    som: 'S/ 102M',
+    tamLabel:'Mercado cuidado infantil por horas NSE C Lima',
+    samLabel:'Accesible en radio de influencia del Grupo (Lima Norte/Sur/Este)',
+    somLabel:'Captura directa fase 1 · más S/ 300M en consumo desbloqueado',
+    supuestos:'Dato de campo FP (4/7 sin red de cuidado) · Precio referencial guarderías por horas Lima NSE C (S/ 12–18/hora) · Sin oferta formal existente en este rango de precio → mercado greenfield',
+    palanca:'El ingreso directo (S/ 102M) es casi secundario. El dato que importa: S/ 300M de consumo bloqueado en Cineplanet, Real Plaza, UTP y Inkafarma que se desbloquea si el Grupo resuelve el cuidado.',
+  },
+  {
+    id:'o8',
+    titulo:'Bring joy at home',
+    plat:'Cineplanet · Bembos · Casa Andina',
+    color:'#C45A00',
+    tipo:'Net-new · Disruptiva',
+    metodologia:[
+      'Gasto entretenimiento en casa NSE C Lima: ~S/ 180/mes/hogar (streaming + snacks + ocio en hogar)',
+      'Mercado entretenimiento en hogar NSE C Lima: 1.55M × S/ 2,160/año = S/ 3,348M/año',
+      'Hoy el 100% lo capturan Netflix, Disney+, YouTube — ninguna plataforma de Intercorp',
+      'Mercado direccionable para Intercorp (experiencias únicas que streaming no ofrece): ~15% = S/ 502M',
+      'Captura realista en 5 años con producto diferenciado: 8% = S/ 268M',
+    ],
+    mercadoTotal: 3348,
+    shareActual: 0,
+    shareTarget: 8,
+    oportunidad: 268,
+    tam: 'S/ 3,348M',
+    sam: 'S/ 502M',
+    som: 'S/ 268M',
+    tamLabel:'Mercado entretenimiento en hogar NSE C Lima',
+    samLabel:'Segmento no cubierto por Netflix (experiencias físicas/únicas)',
+    somLabel:'Captura Intercorp en 5 años con producto diferenciado',
+    supuestos:'Gasto recreación/comunicaciones APEIM 2023 · Penetración streaming NSE C ~60% · Mercado direccionable = lo que Netflix no puede ofrecer (productos físicos, gastronomía en casa, contenido con identidad local)',
+    palanca:'Netflix tiene el contenido pero no tiene Bembos, ni Casa Andina, ni los ingredientes de la cocina peruana. Intercorp tiene exactamente lo que Netflix no puede tener.',
+  },
+];
+
 const OPPS = [
   {
     id:'o1',tipo:'Quick win',q:'tl',
@@ -247,7 +444,7 @@ const Overview = ({go}) => (
     <div style={{fontFamily:'Syne',fontSize:22,fontWeight:700,marginBottom:20}}>¿Por dónde quieres empezar?</div>
     <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:12}}>
       {[
-        {id:'journey',icon:'◈',title:'Journey & Lifetime Value',desc:'Hitos, emociones y valor acumulado para Intercorp por cada etapa del ciclo de vida.',c:'#C45A00'},
+        {id:'sizing',icon:'◈',title:'Dimensionamiento',desc:'TAM / SAM / SOM para cada oportunidad. Modelo bottom-up desde gasto NSE C Lima con supuestos explícitos.',c:'#0B6E4F'},
         {id:'segmentos',icon:'◉',title:'Segmentos motivacionales',desc:'Los 3 clusters de la encuesta. Quiénes son, qué los mueve, cómo difieren.',c:'var(--gold)'},
         {id:'metas',icon:'◎',title:'Metas y sueños',desc:'Las 6 metas del campo, qué dice la investigación, y por qué el gap persiste.',c:'#2D5FA0'},
         {id:'insights',icon:'◆',title:'Insights × Plataformas',desc:'Heatmap de impacto: cómo cada hallazgo afecta cada vertical del Grupo.',c:'#0B6E4F'},
@@ -1341,8 +1538,157 @@ const Journey=()=>{
   );
 };
 
+// ── SIZING ──
+const Sizing=()=>{
+  const [active,setActive]=useState('o1');
+  const s=SIZING.find(x=>x.id===active)||SIZING[0];
+  const fmtM=v=>`S/ ${(v/1000).toFixed(1)}B`;
+  const fmt=v=>`S/ ${v.toLocaleString()}M`;
+
+  return(
+    <div style={{maxWidth:960,margin:'0 auto',padding:'40px 32px 80px'}}>
+      <Eyebrow label="Dimensionamiento · Análisis de mercado"/>
+      <div style={{fontFamily:'Syne',fontSize:26,fontWeight:700,marginBottom:8}}>Tamaño de las oportunidades</div>
+      <div style={{fontSize:13,color:'var(--ink3)',marginBottom:6,lineHeight:1.65}}>
+        Modelo bottom-up: Gasto NSE C Lima (S/ 3,700/mes · APEIM 2023) × 1.55M hogares = S/ 68,820M/año mercado total. Cada oportunidad dimensionada en TAM → SAM → SOM con supuestos explícitos.
+      </div>
+      <div style={{fontSize:11,color:'var(--ink3)',marginBottom:24,padding:'8px 12px',background:'rgba(196,147,58,0.06)',borderRadius:7,border:'0.5px solid var(--gold-bd)'}}>
+        ⚠ Estimados indicativos para dimensionar la priorización estratégica — no proyecciones financieras. Los supuestos están documentados en cada oportunidad. La captura real de Intercorp depende de penetración actual, capacidad de ejecución y velocidad de lanzamiento.
+      </div>
+
+      {/* Selector */}
+      <div style={{display:'flex',gap:6,flexWrap:'wrap',marginBottom:20}}>
+        {SIZING.map(x=>(
+          <button key={x.id} onClick={()=>setActive(x.id)} style={{
+            padding:'6px 12px',borderRadius:100,fontSize:11,fontWeight:500,
+            border:active===x.id?'none':'0.5px solid var(--bdr)',
+            background:active===x.id?x.color:'var(--wh)',
+            color:active===x.id?'#FAF8F5':'var(--ink3)',
+            transition:'all 0.15s',
+          }}>{x.titulo.split('—')[0].trim()}</button>
+        ))}
+      </div>
+
+      {/* Summary cards top */}
+      <div style={{display:'grid',gridTemplateColumns:'repeat(7,1fr)',gap:8,marginBottom:16}}>
+        {SIZING.map(x=>(
+          <div key={x.id} onClick={()=>setActive(x.id)} style={{
+            background: active===x.id?x.color:'var(--wh)',
+            border:`0.5px solid ${active===x.id?x.color:'var(--bdr)'}`,
+            borderRadius:10,padding:'12px 10px',cursor:'pointer',
+            transition:'all 0.15s',textAlign:'center',
+          }}>
+            <div style={{fontFamily:'Syne',fontSize:14,fontWeight:700,color:active===x.id?'#FAF8F5':x.color,lineHeight:1,marginBottom:3}}>
+              {fmt(x.oportunidad)}
+            </div>
+            <div style={{fontSize:9,color:active===x.id?'rgba(255,255,255,0.6)':'var(--ink3)',lineHeight:1.3}}>{x.titulo.split('—')[0].replace('La ','').replace('Cuenta con ','').replace('Crédito de ','').trim().substring(0,18)}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Detail */}
+      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:14,alignItems:'start'}}>
+
+        {/* TAM / SAM / SOM */}
+        <div>
+          <div style={{background:'var(--wh)',border:`0.5px solid ${s.color}33`,borderRadius:12,overflow:'hidden'}}>
+            <div style={{padding:'16px 20px',borderBottom:'0.5px solid var(--bdr)',background:'var(--bg2)',display:'flex',alignItems:'center',gap:10}}>
+              <div style={{width:4,borderRadius:2,background:s.color,alignSelf:'stretch',flexShrink:0}}/>
+              <div>
+                <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1.5px',color:s.color,marginBottom:2}}>{s.tipo} · {s.plat}</div>
+                <div style={{fontFamily:'Syne',fontSize:15,fontWeight:600}}>{s.titulo}</div>
+              </div>
+            </div>
+
+            {/* TAM SAM SOM bars */}
+            {[
+              {label:'TAM',sublabel:s.tamLabel,val:s.mercadoTotal,pct:100,col:s.color+'33',border:s.color+'66'},
+              {label:'SAM',sublabel:s.samLabel,val:Math.round(s.mercadoTotal*(s.shareTarget/100)*1.2),pct:s.shareTarget*1.2,col:s.color+'55',border:s.color+'88'},
+              {label:'SOM',sublabel:s.somLabel,val:s.oportunidad,pct:(s.oportunidad/s.mercadoTotal)*100,col:s.color,border:s.color},
+            ].map((tier,i)=>(
+              <div key={i} style={{padding:'14px 20px',borderBottom:'0.5px solid var(--bdr2)'}}>
+                <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:6}}>
+                  <div>
+                    <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:3}}>
+                      <span style={{fontFamily:'Syne',fontSize:13,fontWeight:700,color:s.color}}>{tier.label}</span>
+                      <span style={{fontSize:9,fontWeight:600,padding:'1px 6px',borderRadius:100,background:`${s.color}15`,color:s.color}}>
+                        {tier.label==='TAM'?'Mercado total':tier.label==='SAM'?'Mercado accesible':'Captura realista'}
+                      </span>
+                    </div>
+                    <div style={{fontSize:11,color:'var(--ink3)',lineHeight:1.4}}>{tier.sublabel}</div>
+                  </div>
+                  <div style={{fontFamily:'Syne',fontSize:20,fontWeight:700,color:tier.label==='SOM'?s.color:'var(--ink)',textAlign:'right',flexShrink:0,marginLeft:10}}>
+                    {fmt(tier.val)}
+                  </div>
+                </div>
+                <div style={{height:6,background:'var(--bg2)',borderRadius:3,overflow:'hidden'}}>
+                  <div style={{height:'100%',width:`${Math.min(tier.pct,100)}%`,background:tier.col,borderRadius:3,border:`1px solid ${tier.border}`}}/>
+                </div>
+              </div>
+            ))}
+
+            {/* SOM destacado */}
+            <div style={{padding:'16px 20px',background:`${s.color}08`}}>
+              <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1px',color:s.color,marginBottom:6}}>Oportunidad para Intercorp (SOM)</div>
+              <div style={{fontFamily:'Syne',fontSize:32,fontWeight:800,color:s.color,lineHeight:1,marginBottom:4}}>{fmt(s.oportunidad)}/año</div>
+              <div style={{fontSize:12,color:'var(--ink2)',lineHeight:1.65}}>{s.palanca}</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Metodología + supuestos */}
+        <div style={{display:'flex',flexDirection:'column',gap:12}}>
+          <div style={{background:'var(--wh)',border:'0.5px solid var(--bdr)',borderRadius:12,padding:'16px 18px'}}>
+            <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1.5px',color:'var(--ink3)',marginBottom:12}}>Cadena de cálculo · bottom-up</div>
+            <div style={{display:'flex',flexDirection:'column',gap:8}}>
+              {s.metodologia.map((step,i)=>(
+                <div key={i} style={{display:'flex',gap:10,alignItems:'flex-start'}}>
+                  <div style={{
+                    width:20,height:20,borderRadius:'50%',
+                    background:`${s.color}15`,color:s.color,
+                    fontSize:10,fontWeight:700,
+                    display:'flex',alignItems:'center',justifyContent:'center',
+                    flexShrink:0,marginTop:1,
+                  }}>{i+1}</div>
+                  <div style={{fontSize:11.5,color:'var(--ink2)',lineHeight:1.6}}>{step}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div style={{background:'var(--bg2)',border:'0.5px solid var(--bdr)',borderRadius:12,padding:'14px 16px'}}>
+            <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1.5px',color:'var(--ink3)',marginBottom:6}}>Supuestos y fuentes</div>
+            <div style={{fontSize:11.5,color:'var(--ink2)',lineHeight:1.65}}>{s.supuestos}</div>
+          </div>
+
+          {/* Comparativa total */}
+          <div style={{background:'#0A0908',borderRadius:12,padding:'16px 18px'}}>
+            <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1.5px',color:'rgba(250,248,245,0.4)',marginBottom:10}}>Todas las oportunidades · SOM comparado</div>
+            {SIZING.map(x=>(
+              <div key={x.id} onClick={()=>setActive(x.id)} style={{display:'flex',alignItems:'center',gap:10,marginBottom:7,cursor:'pointer',opacity:active===x.id?1:0.6,transition:'opacity 0.15s'}}>
+                <div style={{fontSize:10,color:'rgba(250,248,245,0.5)',width:90,flexShrink:0,textAlign:'right',lineHeight:1.3}}>
+                  {x.titulo.split('—')[0].trim().substring(0,18)}
+                </div>
+                <div style={{flex:1,height:6,background:'rgba(255,255,255,0.08)',borderRadius:3}}>
+                  <div style={{height:'100%',width:`${(x.oportunidad/400)*100}%`,background:active===x.id?x.color:'rgba(255,255,255,0.25)',borderRadius:3,transition:'background 0.2s'}}/>
+                </div>
+                <div style={{fontSize:11,fontWeight:600,color:active===x.id?x.color:'rgba(250,248,245,0.5)',width:62,flexShrink:0}}>{fmt(x.oportunidad)}</div>
+              </div>
+            ))}
+            <div style={{marginTop:10,paddingTop:10,borderTop:'0.5px solid rgba(255,255,255,0.08)',fontSize:11,color:'rgba(250,248,245,0.35)'}}>
+              Total SOM acumulado: <span style={{color:'var(--gold)',fontWeight:600}}>
+                S/ {SIZING.reduce((acc,x)=>acc+x.oportunidad,0).toLocaleString()}M/año
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // ── APP ──
-const VIEWS=[{id:'overview',label:'Inicio'},{id:'etapas',label:'Etapas de vida'},{id:'journey',label:'Journey'},{id:'segmentos',label:'Segmentos'},{id:'metas',label:'Metas y sueños'},{id:'insights',label:'Insights'},{id:'oportunidades',label:'Oportunidades'},{id:'plataformas',label:'Deep dive'}];
+const VIEWS=[{id:'overview',label:'Inicio'},{id:'etapas',label:'Etapas de vida'},{id:'journey',label:'Journey'},{id:'segmentos',label:'Segmentos'},{id:'metas',label:'Metas y sueños'},{id:'insights',label:'Insights'},{id:'oportunidades',label:'Oportunidades'},{id:'sizing',label:'Dimensionamiento'},{id:'plataformas',label:'Deep dive'}];
 
 const App=()=>{
   const [view, setView]=useState('overview');
@@ -1355,6 +1701,7 @@ const App=()=>{
       case 'metas': return <Metas/>;
       case 'insights': return <Insights/>;
       case 'oportunidades': return <Oportunidades/>;
+      case 'sizing': return <Sizing/>;
       case 'plataformas': return <Plataformas/>;
       default: return <Overview go={setView}/>;
     }
