@@ -115,14 +115,54 @@ const INSIGHTS = [
 ];
 
 const OPPS = [
-  {id:'o1',tipo:'Quick win',titulo:'Cuenta con meta nombrada y fricción voluntaria',desc:'El dinero con nombre no se gasta. El cashback de Sip la alimenta automáticamente. Una cuenta donde el usuario elige meta, monto y fecha. Retirar antes requiere un paso adicional.',segs:'Cuidadores y Arquitectos',plat:'Interbank + Sip',q:'tl'},
-  {id:'o2',tipo:'Quick win',titulo:'Cuenta "Universidad de mi hijo/a" + beneficio UTP',desc:'Ahorro etiquetado con monto sugerido según edad del hijo. Beneficio concreto en matrícula UTP. El Grupo tiene las dos piezas. Nadie las ha conectado.',segs:'Todos los clusters',plat:'Interbank + UTP',q:'tl'},
-  {id:'o3',tipo:'Adjacent',titulo:'Crédito de propósito fijo desde historial Sip',desc:'"S/800 para la laptop, 6 cuotas, sin línea abierta" basado en comportamiento de pago en Sip. Sin tarjeta. Sin exposición indefinida.',segs:'Inversionistas y Arquitectos',plat:'Sip → Interbank',q:'tr'},
-  {id:'o4',tipo:'Adjacent',titulo:'Consulta médica express en Inkafarma',desc:'Sin cita, horario extendido, S/30–40. El médico prescribe, la farmacia despacha. Modelo validado en LATAM.',segs:'Todos los clusters',plat:'Inkafarma + Clínica Aviva',q:'tr'},
-  {id:'o5',tipo:'Para validar',titulo:'Cashback de Sip como alimentador automático de meta',desc:'El mismo pago cotidiano construye el ahorro para la meta declarada. Conecta el comportamiento presente con el objetivo futuro sin esfuerzo adicional.',segs:'Cuidadores entregados',plat:'Sip + Interbank',q:'bl'},
-  {id:'o6',tipo:'Para validar',titulo:'Pack Sábado Familiar',desc:'Entrada + menú en Bembos en un clic. Cashback con Sip. Nadie fuera del Grupo puede hacer esto — no tiene todas las piezas en el mismo lugar.',segs:'Cuidadores entregados',plat:'Cineplanet + Bembos + Sip',q:'bl'},
-  {id:'o7',tipo:'Net-new · Disruptiva',titulo:'La junta digital con respaldo formal de Interbank',desc:'El banco respalda la distribución con seguridad formal. La presión social sigue siendo del grupo. Digitaliza el mejor commitment device del Perú informal.',segs:'Arquitectos y Cuidadores',plat:'Interbank + Sip',q:'br'},
-  {id:'o8',tipo:'Net-new · Disruptiva',titulo:'Score crediticio desde comportamiento en el ecosistema',desc:'Comportamiento en Mass, Inkafarma, Cineplanet como proxy crediticio. Credicorp tiene historial bancario. Interbank tiene datos de ecosistema que Credicorp no puede tener.',segs:'Inversionistas proactivos',plat:'Todas las plataformas → Interbank',q:'br'},
+  {
+    id:'o1',tipo:'Quick win',q:'tl',
+    titulo:'Cuenta con propósito — el dinero con nombre no se gasta',
+    desc:'Una cuenta en Interbank donde el usuario declara una meta (universidad del hijo, casa, viaje, emergencia), elige un monto mensual y una fecha objetivo. El saldo tiene nombre. Retirar antes genera fricción deliberada. El cashback de Sip la alimenta automáticamente con cada compra cotidiana. Cuando la meta es educativa, un beneficio concreto en UTP en el momento de la matrícula cierra el círculo — algo que solo el Grupo puede ofrecer. Lo que diferencia a este producto de cualquier cuenta bancaria existente no es la tasa de interés: es que replica el mecanismo psicológico de la junta sin sus riesgos.',
+    segs:'Todos los clusters', plat:'Interbank + Sip + UTP',
+  },
+  {
+    id:'o2',tipo:'Adjacent',q:'tr',
+    titulo:'Crédito de propósito fijo — sin tarjeta, sin línea abierta',
+    desc:'La aversión de estas familias no es al crédito — es a la línea que puede acumularse sin que se note. El producto que aceptarían es el que ya usan con los familiares: monto fijo, propósito declarado, cuota conocida desde el día 1. Lo nuevo es que el historial de comportamiento de pago en Sip — compras regulares en Mass, Inkafarma, PlazaVea — funciona como proxy crediticio para quienes no califican por historial bancario formal. Credicorp tiene el historial del sistema financiero. Interbank tiene los datos de comportamiento del ecosistema. Esa asimetría no se repite.',
+    segs:'Inversionistas y Arquitectos', plat:'Sip → Interbank',
+  },
+  {
+    id:'o3',tipo:'Adjacent',q:'tr',
+    titulo:'Consulta médica express en Inkafarma — donde ya confían',
+    desc:'El gasto imprevisto en salud es el mayor miedo financiero del segmento. Cuando el hijo tiene fiebre a las 9pm, van a clínicas privadas y pagan de bolsillo. Inkafarma ya tiene la confianza ("siempre compro ahí porque sé que venden original") y la ubicación. Una consulta sin cita, horario extendido, S/30–40 — el médico prescribe, la farmacia despacha en el mismo lugar. La confianza en los medicamentos se transfiere a la consulta. No es un modelo nuevo: está validado en México (Farmacias del Ahorro) y Colombia (Drogas La Rebaja). El Grupo tiene todos los activos para replicarlo.',
+    segs:'Todos los clusters', plat:'Inkafarma + Clínica Aviva',
+  },
+  {
+    id:'o4',tipo:'Para validar',q:'bl',
+    titulo:'Pack Sábado Familiar — una decisión resuelve la tarde',
+    desc:'El costo de coordinación de una salida familiar es real y acumulativo: ¿a qué hora?, ¿qué comemos?, ¿va a funcionar con el niño? La familia que llega al mall ya decidió salir — lo que aún no decidió es entrar al cine. Un pack entrada + menú en Bembos, comprable en un clic, con cashback en Sip, elimina esa segunda decisión. No hay competidor externo que pueda hacer esto: no tiene las piezas en el mismo lugar. Lo que hay que validar no es la demanda — es si tres equipos del Grupo se pueden sentar a acordarlo.',
+    segs:'Cuidadores entregados', plat:'Cineplanet + Bembos + Sip',
+  },
+  {
+    id:'o5',tipo:'Net-new · Disruptiva',q:'br',
+    titulo:'La junta digital — el mejor commitment device del Perú informal, con seguridad formal',
+    desc:'La junta resuelve tres cosas que ningún banco formal replica: bloquea el acceso antes de recibir el dinero, exige el aporte mediante presión social del grupo, y el dinero tiene nombre y destino. El 7% declara tener junta activa hoy — la penetración histórica es mayor. El modelo de negocio es simple: Interbank respalda la distribución con seguridad legal, la presión social sigue siendo del grupo. El banco no gestiona el grupo — lo garantiza. El primero que lo haga no está haciendo finanzas inclusivas: está capturando el mecanismo de ahorro más efectivo del mercado peruano.',
+    segs:'Arquitectos y Cuidadores', plat:'Interbank + Sip',
+  },
+  {
+    id:'o6',tipo:'Net-new · Disruptiva · Cross-plataforma',q:'br',
+    titulo:'Cuidado infantil confiable por horas — el habilitador silencioso de todo el ecosistema',
+    desc:'4/7 familias no tienen con quién dejar al hijo. Eso no es un dato social — es un dato de negocio. Cuando la red de cuidado falla, no van al mall, no van al médico, no estudian, no pueden ir al cine. El Grupo pierde consumo en todas sus plataformas simultáneamente. La demanda de cuidado infantil de confianza, por horas, cerca de donde vive la familia, está documentada en el campo. Lo que el campo no define — y no le corresponde definir — es quién del Grupo tiene la credencial correcta para operarlo, en qué formato y dónde. Esa es una decisión estratégica del Grupo. LVL puede facilitar la conversación entre plataformas para responderla.',
+    segs:'Arquitectos y familias sin red de cuidado', plat:'LVL · A definir por el Grupo',
+  },
+  {
+    id:'o7',tipo:'Principio estratégico · Cross-plataforma',q:'tr',
+    titulo:'Meet them where they are — salir de las tiendas para encontrarse con las familias en sus propios espacios',
+    desc:'Las familias pasan la mayor parte de su tiempo libre en los espacios que mejor se adaptan a su rutina diaria: el parque cerca de casa, el vecindario, los espacios del día a día. Disfrutan ir a los espacios de Intercorp — centros comerciales, supermercados — pero no pueden hacerlo todos los días. Esa asimetría define una brecha: la familia quiere el Grupo más presente en su vida, pero no puede ir al Grupo con la frecuencia que querría. La oportunidad no es hacer más atractivos los puntos de venta actuales — es preguntarse qué productos, servicios o experiencias del Grupo pueden llegar a donde la familia ya está, sin pedirle que cambie su rutina. Esto no es una iniciativa de una plataforma — es un principio que debería atravesar el diseño de producto de todas ellas.',
+    segs:'Todos los clusters · especialmente Familia Joven sin movilidad', plat:'LVL · Principio estratégico cross-plataforma',
+  },
+  {
+    id:'o8',tipo:'Net-new · Disruptiva',q:'br',
+    titulo:'Bring joy at home — llevar el disfrute a los hogares que no pueden salir',
+    desc:'Debido a la falta de una red de apoyo confiable, el cansancio extremo de la crianza, y la inseguridad creciente, el hogar se convierte para los padres en el único espacio de escape. Pero aparte de Netflix y YouTube — plataformas de Credicorp o de fuera del Grupo — no hay una oferta de experiencias de disfrute diseñadas para que los padres puedan recargar energía en casa. Llevar bienestar al hogar puede convertirse en una nueva forma de consumo que refuerza el vínculo emocional con las marcas del Grupo. Para Cineplanet esta pregunta es existencial: ¿qué es Cineplanet cuando el hogar es la sala de cine? Para Casa Andina o Bembos: ¿qué versión del disfrute puede llegar a casa? El campo no define el producto — dice que la demanda existe y que hoy la captura Netflix.',
+    segs:'Familia Joven sin red de cuidado · Arquitectos del equilibrio', plat:'Cineplanet · Casa Andina · Bembos · A definir',
+  },
 ];
 
 const Tag = ({children, c='gold', xs}) => {
@@ -144,34 +184,76 @@ const segShort={cuidadores:'Cuidadores',arquitectos:'Arquitectos',inversionistas
 // ── OVERVIEW ──
 const Overview = ({go}) => (
   <div style={{maxWidth:960,margin:'0 auto',padding:'40px 32px 80px'}}>
-    <div style={{background:'#0A0908',borderRadius:16,padding:'48px 52px',marginBottom:10}}>
-      <div style={{fontFamily:'Syne',fontSize:10,fontWeight:600,letterSpacing:'2px',textTransform:'uppercase',color:'var(--gold)',marginBottom:12}}>La Victoria Lab × Intercorp · Lima 2025</div>
-      <div style={{fontFamily:'Syne',fontSize:38,fontWeight:800,color:'#FAF8F5',lineHeight:1.1,marginBottom:14}}>Familias Peruanas</div>
-      <div style={{fontSize:13,color:'rgba(250,248,245,0.45)',lineHeight:1.7,maxWidth:520,marginBottom:32}}>
-        7 entrevistas en profundidad · Encuesta n=278 · Lima Norte, Sur y Este · NSE C · Familias recién formadas con hijos menores de 10 años
+    {/* HERO */}
+    <div style={{background:'#0A0908',borderRadius:16,padding:'52px 52px 48px',marginBottom:10}}>
+      <div style={{fontFamily:'Syne',fontSize:10,fontWeight:600,letterSpacing:'2px',textTransform:'uppercase',color:'var(--gold)',marginBottom:16}}>La Victoria Lab × Intercorp · Lima 2025</div>
+      <div style={{fontFamily:'Syne',fontSize:44,fontWeight:800,color:'#FAF8F5',lineHeight:1.05,marginBottom:18}}>Familias Peruanas</div>
+      <div style={{fontSize:14,color:'rgba(250,248,245,0.5)',lineHeight:1.8,maxWidth:560,marginBottom:32}}>
+        Una investigación continua sobre cómo vive, decide y consume la clase media peruana a lo largo de 6 etapas del ciclo de vida familiar. NSE C · Lima Metropolitana.
       </div>
-      <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:10}}>
-        {[['~500K','hogares NSE C con hijos <10 años en Lima Met.'],['3','segmentos motivacionales identificados'],['6','metas y sueños documentados en campo'],['5','plataformas del Grupo con oportunidades']].map(([n,l],i)=>(
-          <div key={i} style={{background:'rgba(255,255,255,0.05)',border:'0.5px solid rgba(255,255,255,0.08)',borderRadius:10,padding:'14px 16px'}}>
-            <div style={{fontFamily:'Syne',fontSize:26,fontWeight:700,color:'var(--gold)',lineHeight:1,marginBottom:4}}>{n}</div>
-            <div style={{fontSize:11,color:'rgba(250,248,245,0.4)',lineHeight:1.4}}>{l}</div>
-          </div>
-        ))}
-      </div>
-    </div>
-    <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:10,marginBottom:32}}>
-      {[['3.36M','Hogares totales Lima Met.','APEIM 2023',false],['~1.55M','Hogares NSE C (48%)','APEIM 2023',false],['~41%','Con hijos <12 años Lima Met.','INEI/ENAHO',false],['52%','Usa billetera digital como pago principal','Encuesta n=278',true]].map(([n,l,s,red],i)=>(
-        <div key={i} style={{background:red?'rgba(139,32,0,0.04)':'var(--wh)',border:`0.5px solid ${red?'rgba(139,32,0,0.2)':'var(--bdr)'}`,borderRadius:10,padding:'16px 18px'}}>
-          <div style={{fontFamily:'Syne',fontSize:24,fontWeight:700,color:red?'#8B2000':'var(--gold)',lineHeight:1,marginBottom:4}}>{n}</div>
-          <div style={{fontSize:11,color:'var(--ink3)',lineHeight:1.4}}>{l}</div>
-          <div style={{fontSize:9,color:'var(--ink3)',opacity:0.5,marginTop:3}}>{s}</div>
+
+      {/* Etapas strip */}
+      <div style={{borderTop:'0.5px solid rgba(255,255,255,0.08)',paddingTop:24}}>
+        <div style={{fontSize:9,fontWeight:600,letterSpacing:'2px',textTransform:'uppercase',color:'rgba(250,248,245,0.3)',marginBottom:14}}>6 etapas de vida estudiadas</div>
+        <div style={{display:'grid',gridTemplateColumns:'repeat(6,1fr)',gap:6}}>
+          {[
+            {n:'Joven Independiente',r:'< 40 años',e1:false,e2:true,c:'#C4933A'},
+            {n:'Pareja Sin Hijos',r:'< 45 años',e1:false,e2:false,c:'#2D5FA0'},
+            {n:'Familia Joven',r:'Hijos < 6 años',e1:true,e2:false,c:'#0B6E4F'},
+            {n:'Familia con Experiencia',r:'Hijos 6–25 años',e1:false,e2:false,c:'#5B3FA0'},
+            {n:'Nido Vacío',r:'40–64 años',e1:false,e2:true,c:'#8B2000'},
+            {n:'Adulto Mayor',r:'65+ años',e1:false,e2:false,c:'#3A3830'},
+          ].map((e,i)=>(
+            <div key={i} style={{background:'rgba(255,255,255,0.04)',borderRadius:8,padding:'10px 10px',borderTop:`2px solid ${e.c}`}}>
+              <div style={{fontSize:10,fontWeight:500,color:'rgba(250,248,245,0.75)',lineHeight:1.3,marginBottom:4}}>{e.n}</div>
+              <div style={{fontSize:9,color:'rgba(250,248,245,0.3)',marginBottom:6}}>{e.r}</div>
+              <div style={{display:'flex',gap:3}}>
+                {e.e1&&<span style={{fontSize:8,fontWeight:600,padding:'1px 5px',borderRadius:100,background:'rgba(196,147,58,0.2)',color:'#C4933A'}}>E1</span>}
+                {e.e2&&<span style={{fontSize:8,fontWeight:600,padding:'1px 5px',borderRadius:100,background:'rgba(11,110,79,0.2)',color:'#4CAF7D'}}>E2</span>}
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
+        <div style={{marginTop:12,display:'flex',gap:12,alignItems:'center'}}>
+          <div style={{display:'flex',alignItems:'center',gap:5,fontSize:10,color:'rgba(250,248,245,0.35)'}}>
+            <span style={{fontSize:8,fontWeight:600,padding:'1px 5px',borderRadius:100,background:'rgba(196,147,58,0.2)',color:'#C4933A'}}>E1</span>
+            Etapa 1 (2025) — Familia Joven fue el foco central
+          </div>
+          <div style={{display:'flex',alignItems:'center',gap:5,fontSize:10,color:'rgba(250,248,245,0.35)'}}>
+            <span style={{fontSize:8,fontWeight:600,padding:'1px 5px',borderRadius:100,background:'rgba(11,110,79,0.2)',color:'#4CAF7D'}}>E2</span>
+            Etapa 2 (2026) — Joven Independiente y Nido Vacío
+          </div>
+        </div>
+      </div>
     </div>
+
+    {/* Metodología */}
+    <div style={{background:'var(--wh)',border:'0.5px solid var(--bdr)',borderRadius:12,padding:'18px 22px',marginBottom:20,display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:16}}>
+      <div>
+        <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1.5px',color:'var(--ink3)',marginBottom:5}}>Metodología Etapa 1</div>
+        <div style={{fontSize:12,color:'var(--ink2)',lineHeight:1.65}}>7 entrevistas en profundidad + encuesta n=278 · Lima Norte, Sur y Este · NSE C · Familias Jóvenes con hijos menores de 6 años</div>
+      </div>
+      <div>
+        <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1.5px',color:'var(--ink3)',marginBottom:5}}>Alcance poblacional</div>
+        <div style={{fontSize:12,color:'var(--ink2)',lineHeight:1.65}}>~1.55M hogares NSE C en Lima Met. (APEIM 2023) · ~500K en etapa Familia Joven · 106K nacimientos/año (MINSA 2023)</div>
+      </div>
+      <div>
+        <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1.5px',color:'var(--ink3)',marginBottom:5}}>Segmentos identificados</div>
+        <div style={{fontSize:12,color:'var(--ink2)',lineHeight:1.65}}>3 clusters motivacionales de la encuesta · 6 metas y sueños documentados · 6 oportunidades para el ecosistema Intercorp</div>
+      </div>
+    </div>
+
     <Eyebrow label="Explorar la investigación"/>
     <div style={{fontFamily:'Syne',fontSize:22,fontWeight:700,marginBottom:20}}>¿Por dónde quieres empezar?</div>
-    <div style={{display:'grid',gridTemplateColumns:'repeat(2,1fr)',gap:12}}>
-      {[{id:'segmentos',icon:'◉',title:'Segmentos motivacionales',desc:'Los 3 clusters de la encuesta. Quiénes son, qué los mueve, cómo difieren.',c:'var(--gold)'},{id:'metas',icon:'◎',title:'Metas y sueños',desc:'Las 6 metas del campo, qué dice la investigación, y por qué el gap persiste.',c:'#2D5FA0'},{id:'insights',icon:'◆',title:'Insights × Plataformas',desc:'Heatmap de impacto: cómo cada hallazgo afecta cada vertical del Grupo.',c:'#0B6E4F'},{id:'oportunidades',icon:'▸',title:'Oportunidades',desc:'Matriz impacto/esfuerzo: quick wins, adjacentes, disruptivas.',c:'#5B3FA0'}].map(item=>(
+    <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:12}}>
+      {[
+        {id:'etapas',icon:'◌',title:'Etapas de vida',desc:'Los 6 segmentos del proyecto. Definición, tamaño estimado y datos públicos de cada uno.',c:'#3A3830'},
+        {id:'segmentos',icon:'◉',title:'Segmentos motivacionales',desc:'Los 3 clusters de la encuesta. Quiénes son, qué los mueve, cómo difieren.',c:'var(--gold)'},
+        {id:'metas',icon:'◎',title:'Metas y sueños',desc:'Las 6 metas del campo, qué dice la investigación, y por qué el gap persiste.',c:'#2D5FA0'},
+        {id:'insights',icon:'◆',title:'Insights × Plataformas',desc:'Heatmap de impacto: cómo cada hallazgo afecta cada vertical del Grupo.',c:'#0B6E4F'},
+        {id:'oportunidades',icon:'▸',title:'Oportunidades',desc:'Matriz impacto/esfuerzo: quick wins, adjacentes, disruptivas.',c:'#5B3FA0'},
+        {id:'plataformas',icon:'▹',title:'Deep dive por plataforma',desc:'Insights y oportunidades específicas para cada equipo del Grupo.',c:'#8B2000'},
+      ].map(item=>(
         <div key={item.id} onClick={()=>go(item.id)} style={{background:'var(--wh)',border:'0.5px solid var(--bdr)',borderLeft:`3px solid ${item.c}`,borderRadius:12,padding:'22px 24px',cursor:'pointer',transition:'transform 0.15s'}}
           onMouseEnter={e=>e.currentTarget.style.transform='translateY(-2px)'}
           onMouseLeave={e=>e.currentTarget.style.transform='translateY(0)'}>
@@ -283,7 +365,7 @@ const Segmentos = () => {
         </div>
       )}
       <div style={{marginTop:12,padding:'12px 16px',background:'var(--bg2)',borderRadius:8,border:'0.5px solid var(--bdr)',fontSize:11.5,color:'var(--ink3)',lineHeight:1.65}}>
-        <strong style={{color:'var(--ink)'}}>Nota metodológica:</strong> Clusterización sobre 7 índices motivacionales (n=278). El 28% "Resto" no mostró perfil diferenciado suficiente. Segmento: Familias recién formadas, hijos 0–10 años, NSE C, Lima Metropolitana.
+        <strong style={{color:'var(--ink)'}}>Nota metodológica:</strong> Clusterización sobre 7 índices motivacionales (n=278). El 28% "Resto" no mostró perfil diferenciado suficiente. Segmento: Familias recién formadas, hijos 0–6 años, NSE C, Lima Metropolitana.
       </div>
     </div>
   );
@@ -491,7 +573,14 @@ const Plataformas = () => {
   ];
   const current=plats.find(p=>p.id===plat);
   const platInsights=current.insIds.map(id=>INSIGHTS.find(i=>i.id===id)).filter(Boolean);
-  const platOpps=OPPS.filter(o=>o.plat.toLowerCase().includes(plat==='finanzas'?'interbank':plat==='edu'?'utp':plat==='salud'?'inkafarma':plat==='entret'?'cineplanet':plat));
+  const platOpps=OPPS.filter(o=>{
+    if(plat==='finanzas') return ['o1','o2','o5'].includes(o.id);
+    if(plat==='retail') return ['o3','o6','o7'].includes(o.id);
+    if(plat==='salud') return ['o3'].includes(o.id);
+    if(plat==='edu') return ['o1','o6','o7'].includes(o.id);
+    if(plat==='entret') return ['o4','o6','o7','o8'].includes(o.id);
+    return false;
+  });
 
   return (
     <div style={{maxWidth:960,margin:'0 auto',padding:'40px 32px 80px'}}>
@@ -554,14 +643,541 @@ const Plataformas = () => {
   );
 };
 
+// ── ETAPAS DE VIDA ──
+const ETAPAS = [
+  {
+    id:'joven',
+    num:'01',
+    nombre:'Joven Independiente',
+    rango:'< 40 años',
+    def:'Sin pareja conviviente, sin hijos, no depende económicamente de padres.',
+    color:'#C4933A',
+    icon:'◎',
+    etapa2: true,
+    desc:'Joven que vive de forma autónoma, fuera del hogar de origen. Primeros productos financieros, primeras decisiones de consumo propias. La independencia económica es el hito que define la etapa.',
+    tamano:{
+      hogares:'~130,000',
+      personas:'~130,000',
+      base:'NSE C Lima Met. · personas <40 años sin pareja ni hijos, económicamente independientes',
+      fuente:'Estimado APEIM 2023 + INEI Censo 2017',
+    },
+    datos:[
+      {l:'Billetera digital como pago principal',v:'~60% NSE C joven · encuesta FP'},
+      {l:'Edad promedio primer empleo estable',v:'~22 años · INEI/ENAHO'},
+      {l:'Ingreso promedio NSE C (18–29 años)',v:'S/ 1,200–1,800 · APEIM 2023'},
+      {l:'Principal meta de ahorro',v:'Independencia / vivienda propia'},
+    ],
+    tension:'Quiere autonomía pero sus ingresos son inestables. El banco formal lo ve como riesgo. La billetera digital (Yape) es su principal instrumento — Plin casi no aparece.',
+    producto:'Sip, Interbank cuentas jóvenes, Cineplanet, UTP/IDAT',
+    etapa1: false,
+  },
+  {
+    id:'pareja',
+    num:'02',
+    nombre:'Pareja Sin Hijos',
+    rango:'< 45 años',
+    def:'Con pareja conviviente o casada, sin hijos.',
+    color:'#2D5FA0',
+    icon:'◉',
+    etapa2: false,
+    desc:'Pareja que aún no tiene hijos. Doble ingreso potencial. Planificando el futuro: vivienda, viaje, primer hijo. Mayor capacidad de ahorro pero también mayor gasto conjunto.',
+    tamano:{
+      hogares:'~165,000',
+      personas:'~330,000',
+      base:'NSE C Lima Met. · parejas sin hijos, ambos miembros menores de 45 años',
+      fuente:'Estimado APEIM 2023 + ENDES 2023',
+    },
+    datos:[
+      {l:'Edad promedio primer matrimonio Lima (hombres)',v:'39 años · INEI 2023'},
+      {l:'Edad promedio primer matrimonio Lima (mujeres)',v:'35 años · INEI 2023'},
+      {l:'Convivencia vs matrimonio NSE C',v:'~60% conviven sin casarse'},
+      {l:'Principal meta',v:'Vivienda propia (28%+ de metas de ahorro)'},
+    ],
+    tension:'Doble ingreso, gasto duplicado. La vivienda es la meta más concreta y más difícil de alcanzar sin un vehículo de ahorro sostenido. El crédito hipotecario genera ansiedad.',
+    producto:'Interbank ahorro, Sip, Promart, Casa Andina, Cineplanet',
+    etapa1: false,
+  },
+  {
+    id:'familiar-joven',
+    num:'03',
+    nombre:'Familia Joven',
+    rango:'Hijos < 6 años',
+    def:'Pareja que tiene hijos menores de 6 años.',
+    color:'#0B6E4F',
+    icon:'◆',
+    etapa2: false,
+    etapa1: true,
+    desc:'El segmento estudiado en profundidad en Etapa 1. Pareja con hijos menores de 6 años — el momento de mayor presión simultánea: cuidado intensivo, deuda activa, metas lejanas, salud como miedo latente.',
+    tamano:{
+      hogares:'~310,000',
+      personas:'~1,000,000',
+      base:'NSE C Lima Met. · hogares con hijos menores de 6 años',
+      fuente:'APEIM 2023 (48% NSE C) + MINSA nacimientos Lima (~106K/año)',
+    },
+    datos:[
+      {l:'Nacimientos anuales Lima Metropolitana',v:'~106,000 · MINSA 2023'},
+      {l:'Sin red de cuidado activa',v:'4/7 familias · campo Etapa 1'},
+      {l:'Ingreso promedio hogar NSE C',v:'S/ 3,700 · APEIM 2023'},
+      {l:'Ahorra activamente para educación del hijo',v:'Solo 8% · encuesta FP'},
+    ],
+    tension:'La red de cuidado es el cuello de botella de todo lo demás: sin ella, no pueden trabajar, estudiar, consumir ni descansar. El sistema financiero formal no está diseñado para esta complejidad.',
+    producto:'Todo el ecosistema Intercorp · segmento central del proyecto',
+  },
+  {
+    id:'familiar-exp',
+    num:'04',
+    nombre:'Familia con Experiencia',
+    rango:'Hijos 6–25 años',
+    def:'Tiene hijos entre 6 y 25 años que viven en casa (en edad académica).',
+    color:'#5B3FA0',
+    icon:'▸',
+    etapa2: false,
+    desc:'Familia con hijos en edad escolar o universitaria viviendo en casa. La meta educativa entra en su tramo activo — ya no es abstracta, es una factura concreta y creciente.',
+    tamano:{
+      hogares:'~380,000',
+      personas:'~1,200,000',
+      base:'NSE C Lima Met. · hogares con hijos 6–25 años en casa',
+      fuente:'Estimado APEIM 2023 + INEI pirámide poblacional',
+    },
+    datos:[
+      {l:'Gasto promedio en educación NSE C',v:'S/ 225/mes · APEIM 2020'},
+      {l:'Hogares con deuda activa NSE C',v:'~58% · encuesta FP'},
+      {l:'Población 6–17 años Lima Met.',v:'~1.8M · INEI 2024'},
+      {l:'Principal tensión',v:'Gasto educativo real vs ahorro insuficiente'},
+    ],
+    tension:'El gasto educativo ya es real y creciente. El ahorro que debió acumularse para la universidad rara vez alcanzó. La brecha entre intención y acción financiera se hace concreta aquí.',
+    producto:'UTP, IDAT, Interbank crédito educativo, Innova Schools, Inkafarma',
+    etapa1: false,
+  },
+  {
+    id:'nido',
+    num:'05',
+    nombre:'Nido Vacío',
+    rango:'40–64 años',
+    def:'Pareja cuyos hijos mayores de 18 ya no viven en casa.',
+    color:'#8B2000',
+    icon:'○',
+    etapa2: true,
+    desc:'La pareja redescubre su dinámica sin hijos en casa. Ingresos en su punto más alto de carrera, pero la jubilación en el horizonte. Momento de mayor capacidad y mayor incertidumbre pensional.',
+    tamano:{
+      hogares:'~155,000',
+      personas:'~290,000',
+      base:'NSE C Lima Met. · pareja 40–64 años, hijos mayores de 18 fuera del hogar',
+      fuente:'Estimado APEIM 2023 + INEI 2023',
+    },
+    datos:[
+      {l:'Edad promedio salida de hijos del hogar Perú',v:'~22–25 años (estimado)'},
+      {l:'Afiliados a AFP NSE C (40–60 años)',v:'~45% · SBS 2023'},
+      {l:'Hogares Lima Met. conducidos por 40–64 años',v:'~35% del total · INEI'},
+      {l:'Principal preocupación',v:'Jubilación y salud propia'},
+    ],
+    tension:'Mayor capacidad económica pero mayor exposición a enfermedades crónicas y a la incertidumbre del sistema AFP. El ahorro informal sigue siendo la estrategia más usada.',
+    producto:'Interseguro, Interbank ahorro/jubilación, Inkafarma, Clínica Aviva, Cineplanet',
+    etapa1: false,
+  },
+  {
+    id:'adulto',
+    num:'06',
+    nombre:'Adulto Mayor',
+    rango:'65+ años',
+    def:'Tiene más de 65 años (jubilado o dependiente).',
+    color:'#3A3830',
+    icon:'◌',
+    etapa2: false,
+    desc:'Jubilados o en retiro parcial. Dependencia creciente del sistema de salud y de la familia. La red familiar es el soporte económico y emocional más importante.',
+    tamano:{
+      hogares:'~155,000',
+      personas:'~250,000',
+      base:'NSE C Lima Met. · jefe de hogar 65+ años',
+      fuente:'INEI Q1 2023 (41.7% hogares Lima Met. con adulto mayor) + APEIM 2023',
+    },
+    datos:[
+      {l:'Hogares Lima Met. con adulto mayor (60+)',v:'41.7% · INEI 2023'},
+      {l:'Con algún seguro de salud',v:'89.8% · INEI 2023'},
+      {l:'Jefes de hogar 60+ a nivel país',v:'25.9% del total · INEI 2023'},
+      {l:'Principal vínculo con mercado formal',v:'Sistema de salud (Inkafarma, EsSalud)'},
+    ],
+    tension:'La familia es el sistema de soporte más sólido — y más frágil. La soledad y la dependencia son las tensiones centrales. El sistema de salud es su principal punto de contacto con el mercado.',
+    producto:'Inkafarma, Clínica Aviva, Interseguro, Mass',
+    etapa1: false,
+  },
+];
+
+const EtapasVida=()=>{
+  const [active, setActive]=useState(null);
+  const et=active?ETAPAS.find(e=>e.id===active):null;
+  return (
+    <div style={{maxWidth:960,margin:'0 auto',padding:'40px 32px 80px'}}>
+      <Eyebrow label="El quién · Etapas de vida"/>
+      <div style={{fontFamily:'Syne',fontSize:26,fontWeight:700,marginBottom:8}}>Seis etapas de vida que estamos explorando</div>
+      <div style={{fontSize:13,color:'var(--ink3)',marginBottom:6}}>
+        El proyecto Familias Peruanas estudia la clase media peruana (NSE C) a lo largo de 6 etapas del ciclo de vida familiar. Los tamaños son estimados sobre Lima Metropolitana NSE C (~1.55M hogares · APEIM 2023).
+      </div>
+      <div style={{display:'flex',gap:7,alignItems:'center',marginBottom:24,flexWrap:'wrap'}}>
+        <span style={{fontSize:9,fontWeight:600,padding:'2px 8px',borderRadius:100,background:'rgba(196,147,58,0.12)',color:'#7A4A0A',textTransform:'uppercase',letterSpacing:'0.5px'}}>● Etapa 1 (2025)</span>
+        <span style={{fontSize:9,fontWeight:600,padding:'2px 8px',borderRadius:100,background:'rgba(11,110,79,0.1)',color:'#0B6E4F',textTransform:'uppercase',letterSpacing:'0.5px'}}>● Etapa 2 (2026)</span>
+        <span style={{fontSize:11,color:'var(--ink3)'}}>Etapas activas o completadas en la investigación</span>
+      </div>
+
+      {/* Timeline visual */}
+      <div style={{position:'relative',marginBottom:20}}>
+        <div style={{position:'absolute',top:22,left:24,right:24,height:'0.5px',background:'var(--bdr)',zIndex:0}}/>
+        <div style={{display:'grid',gridTemplateColumns:'repeat(6,1fr)',gap:8,position:'relative',zIndex:1}}>
+          {ETAPAS.map(e=>(
+            <div key={e.id} onClick={()=>setActive(active===e.id?null:e.id)} style={{cursor:'pointer',textAlign:'center'}}>
+              <div style={{
+                width:44,height:44,borderRadius:'50%',
+                background:active===e.id?e.color:'var(--wh)',
+                border:`2px solid ${e.color}`,
+                display:'flex',alignItems:'center',justifyContent:'center',
+                margin:'0 auto 8px',
+                fontSize:16,color:active===e.id?'white':e.color,
+                transition:'all 0.2s',
+                boxShadow:active===e.id?`0 0 0 3px ${e.color}33`:undefined,
+              }}>{e.icon}</div>
+              <div style={{fontSize:9,fontWeight:600,color:active===e.id?e.color:'var(--ink3)',lineHeight:1.3,marginBottom:2}}>{e.nombre}</div>
+              <div style={{fontSize:9,color:'var(--ink3)',opacity:0.6,marginBottom:3}}>{e.rango}</div>
+              <div style={{display:'flex',gap:3,justifyContent:'center',flexWrap:'wrap'}}>
+                {e.etapa1&&<div style={{width:6,height:6,borderRadius:'50%',background:'#C4933A',display:'inline-block'}}/>}
+                {e.etapa2&&<div style={{width:6,height:6,borderRadius:'50%',background:'#0B6E4F',display:'inline-block'}}/>}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Cards grid */}
+      <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:10,marginBottom:12}}>
+        {ETAPAS.map(e=>(
+          <div key={e.id} onClick={()=>setActive(active===e.id?null:e.id)} style={{
+            background:'var(--wh)',borderRadius:12,overflow:'hidden',cursor:'pointer',
+            border:active===e.id?`1.5px solid ${e.color}`:'0.5px solid var(--bdr)',
+            transition:'all 0.15s',
+            boxShadow:active===e.id?`0 0 0 2px ${e.color}22`:undefined,
+          }}>
+            <div style={{height:4,background:e.color}}/>
+            <div style={{padding:'14px 16px'}}>
+              <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:5}}>
+                <div>
+                  <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1px',color:'var(--ink3)',marginBottom:2}}>Etapa {e.num} · {e.rango}</div>
+                  <div style={{fontFamily:'Syne',fontSize:13,fontWeight:600,lineHeight:1.2}}>{e.nombre}</div>
+                </div>
+                <div style={{display:'flex',gap:4,flexShrink:0,marginLeft:6,flexWrap:'wrap',justifyContent:'flex-end'}}>
+                  {e.etapa1&&<span style={{fontSize:9,fontWeight:600,padding:'2px 6px',borderRadius:100,background:'rgba(196,147,58,0.12)',color:'#7A4A0A',whiteSpace:'nowrap'}}>Etapa 1</span>}
+                  {e.etapa2&&<span style={{fontSize:9,fontWeight:600,padding:'2px 6px',borderRadius:100,background:'rgba(11,110,79,0.1)',color:'#0B6E4F',whiteSpace:'nowrap'}}>Etapa 2</span>}
+                </div>
+              </div>
+              <div style={{fontSize:10,color:'var(--ink3)',fontStyle:'italic',marginBottom:7,lineHeight:1.4,borderLeft:'2px solid var(--bdr)',paddingLeft:7}}>{e.def}</div>
+              <div style={{fontSize:11,color:'var(--ink3)',lineHeight:1.55,marginBottom:10}}>{e.desc}</div>
+              <div style={{borderTop:'0.5px solid var(--bdr2)',paddingTop:8}}>
+                <div style={{fontFamily:'Syne',fontSize:18,fontWeight:700,color:e.color,lineHeight:1}}>{e.tamano.hogares}</div>
+                <div style={{fontSize:10,color:'var(--ink3)',marginTop:2}}>hogares estimados · Lima Met. NSE C</div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Detail panel */}
+      {et&&(
+        <div style={{background:'var(--wh)',border:`0.5px solid ${et.color}44`,borderRadius:12,overflow:'hidden'}}>
+          <div style={{padding:'18px 22px',background:'var(--bg2)',borderBottom:'0.5px solid var(--bdr)',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+            <div>
+              <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1.5px',color:et.color,marginBottom:4}}>
+                Etapa {et.num} · {et.rango} {et.etapa2?'· Etapa 2 activa':''}
+              </div>
+              <div style={{fontFamily:'Syne',fontSize:18,fontWeight:700}}>{et.nombre}</div>
+            </div>
+            <button onClick={()=>setActive(null)} style={{background:'var(--bdr2)',border:'none',borderRadius:6,padding:'4px 10px',fontSize:11,color:'var(--ink3)'}}>✕ cerrar</button>
+          </div>
+          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',background:'var(--wh)'}}>
+            {/* Tamaño */}
+            <div style={{padding:'16px 18px',borderRight:'0.5px solid var(--bdr)'}}>
+              <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1px',color:'var(--ink3)',marginBottom:10,paddingBottom:5,borderBottom:'0.5px solid var(--bdr2)'}}>Tamaño del segmento</div>
+              <div style={{fontFamily:'Syne',fontSize:28,fontWeight:800,color:et.color,lineHeight:1,marginBottom:3}}>{et.tamano.hogares}</div>
+              <div style={{fontSize:11,color:'var(--ink3)',marginBottom:10}}>hogares · Lima Met. NSE C</div>
+              <div style={{fontFamily:'Syne',fontSize:18,fontWeight:700,color:'var(--gold)',lineHeight:1,marginBottom:3}}>{et.tamano.personas}</div>
+              <div style={{fontSize:11,color:'var(--ink3)',marginBottom:12}}>personas estimadas</div>
+              <div style={{padding:'8px 10px',background:'var(--bg2)',borderRadius:7,fontSize:10,color:'var(--ink3)',lineHeight:1.55}}>
+                <div style={{fontSize:8,fontWeight:600,textTransform:'uppercase',letterSpacing:'1px',color:'var(--ink3)',marginBottom:3}}>Base del estimado</div>
+                {et.tamano.base}
+                <div style={{marginTop:4,fontSize:9,opacity:0.6}}>{et.tamano.fuente}</div>
+              </div>
+            </div>
+            {/* Datos */}
+            <div style={{padding:'16px 18px',borderRight:'0.5px solid var(--bdr)'}}>
+              <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1px',color:'var(--ink3)',marginBottom:10,paddingBottom:5,borderBottom:'0.5px solid var(--bdr2)'}}>Datos públicos del segmento</div>
+              {et.datos.map((d,i)=>(
+                <div key={i} style={{marginBottom:10}}>
+                  <div style={{fontFamily:'Syne',fontSize:13,fontWeight:700,color:et.color,lineHeight:1,marginBottom:2}}>{d.v}</div>
+                  <div style={{fontSize:11,color:'var(--ink3)',lineHeight:1.4}}>{d.l}</div>
+                </div>
+              ))}
+            </div>
+            {/* Tensión + Producto */}
+            <div style={{padding:'16px 18px'}}>
+              <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1px',color:'var(--ink3)',marginBottom:6,paddingBottom:5,borderBottom:'0.5px solid var(--bdr2)'}}>Tensión central</div>
+              <div style={{fontSize:12,color:'var(--ink2)',lineHeight:1.65,marginBottom:14}}>{et.tension}</div>
+              <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1px',color:'var(--ink3)',marginBottom:6,paddingBottom:5,borderBottom:'0.5px solid var(--bdr2)'}}>Plataformas Intercorp relevantes</div>
+              <div style={{fontSize:11.5,color:'var(--ink2)',lineHeight:1.65}}>{et.producto}</div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Nota metodológica */}
+      <div style={{marginTop:12,padding:'12px 16px',background:'var(--bg2)',borderRadius:8,border:'0.5px solid var(--bdr)',fontSize:11,color:'var(--ink3)',lineHeight:1.65}}>
+        <strong style={{color:'var(--ink)'}}>Nota sobre los estimados:</strong> Los tamaños por etapa se calculan aplicando la distribución por grupos de edad de Lima Metropolitana (INEI Censo 2017 + proyecciones 2024) sobre el universo NSE C de Lima Met. (~1.55M hogares, APEIM 2023). Los rangos de etapa de vida son aproximados — no hay una fuente oficial que cruce NSE C × etapa de vida directamente. Los datos de campo corresponden exclusivamente a la etapa Familia Joven (Etapas 1 y 2 del proyecto).
+      </div>
+    </div>
+  );
+};
+
+// ── CHAT ──
+const SYSTEM_PROMPT = `Eres un asistente de investigación especializado en el proyecto Familias Peruanas de La Victoria Lab para Intercorp. Tienes acceso profundo a todos los datos de la investigación.
+
+CONTEXTO DE LA INVESTIGACIÓN:
+- 7 entrevistas en profundidad + encuesta n=278, Lima NSE C, familias con hijos menores de 6 años (Etapa 1, 2025)
+- Etapa 2 (2026): Joven Independiente y Nido Vacío
+
+6 ETAPAS DE VIDA:
+1. Joven Independiente: sin pareja, sin hijos, autónomo, <40 años
+2. Pareja Sin Hijos: con pareja, sin hijos, <45 años
+3. Familia Joven: pareja con hijos <6 años (FOCO ETAPA 1)
+4. Familia con Experiencia: hijos 6–25 años en casa
+5. Nido Vacío: pareja 40–64 años, hijos >18 fuera del hogar (Etapa 2)
+6. Adulto Mayor: 65+ años (jubilado o dependiente)
+
+3 CLUSTERS MOTIVACIONALES (encuesta n=278):
+- Los cuidadores entregados (45%, n=125): conexión 5.6, autonomía 5.7. Motor: familia y legado. 50% paga con billetera digital. 27% meta familia sana, 25% universidad hijo.
+- Los arquitectos del equilibrio (15%, n=42): autonomía 5.7, bienestar 5.0. Motor: equilibrio personal. 57% billetera digital (el más alto). 21% quiere emprender.
+- Los inversionistas proactivos (12%, n=34): crecimiento 5.0, autonomía 5.4. Motor: superación personal. 29% tiene préstamo bancario (el más alto). 38% meta: superación constante.
+- Resto (28%, n=77): sin perfil diferenciado.
+
+DATOS CLAVE:
+- 52% usa billetera digital (Yape/Plin) como pago principal
+- 0/7 mencionaron Plin espontáneamente — Yape (Credicorp) ganó el pago cotidiano
+- 41% ahorra en banco formal
+- 58% tiene alguna deuda activa (22% préstamo bancario)
+- 4/7 no tienen red de cuidado activa
+- 6/7 nombran universidad del hijo como meta central — solo 8% ahorra activamente para ello
+- 7% declara junta activa hoy (penetración histórica es mayor)
+- Driver de ahorro #1: miedo al gasto imprevisto en salud (~40%)
+
+METAS Y SUEÑOS:
+Universidad del hijo, casa propia, colchón de salud, emprendimiento propio, experiencias familiares, estudios propios inconclusos.
+
+6 OPORTUNIDADES IDENTIFICADAS:
+1. Cuenta con propósito (Quick win) — Interbank + Sip + UTP
+2. Crédito de propósito fijo desde historial Sip (Adjacent)
+3. Consulta médica express en Inkafarma (Adjacent)
+4. Pack Sábado Familiar — Cineplanet + Bembos + Sip (Para validar)
+5. La junta digital con respaldo formal de Interbank (Disruptiva)
+6. Cuidado infantil por horas — habilitador del ecosistema (Disruptiva, LVL)
+7. Meet them where they are — principio estratégico cross-plataforma (LVL)
+8. Bring joy at home — Cineplanet/Bembos/Casa Andina en el hogar (Disruptiva)
+
+PLATAFORMAS INTERCORP: Retail (Mass, PlazaVea, Real Plaza), Salud (Inkafarma, Clínica Aviva), Finanzas (Interbank, Sip), Educación (UTP, Innova Schools), Entretenimiento (Cineplanet, Bembos, Casa Andina).
+
+SEÑAL COMPETITIVA: Yape = Credicorp (BCP), el principal competidor. Plin = Interbank. Credicorp ganó el pago cotidiano. El territorio de Intercorp está en lo que Yape no puede hacer.
+
+Responde en español. Sé directo, conciso y basado en evidencia. Si algo no está en los datos de la investigación, dilo claramente. No inventes hallazgos.`;
+
+const Chat=()=>{
+  const [messages, setMessages]=useState([]);
+  const [input, setInput]=useState('');
+  const [loading, setLoading]=useState(false);
+  const [open, setOpen]=useState(false);
+  const bottomRef=React.useRef(null);
+
+  React.useEffect(()=>{
+    if(bottomRef.current) bottomRef.current.scrollIntoView({behavior:'smooth'});
+  },[messages]);
+
+  const send=async()=>{
+    const txt=input.trim();
+    if(!txt||loading) return;
+    setInput('');
+    const userMsg={role:'user',content:txt};
+    const newMessages=[...messages, userMsg];
+    setMessages(newMessages);
+    setLoading(true);
+    try {
+      const res=await fetch('https://api.anthropic.com/v1/messages',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          model:'claude-sonnet-4-20250514',
+          max_tokens:1000,
+          system: SYSTEM_PROMPT,
+          messages: newMessages.map(m=>({role:m.role,content:m.content})),
+        }),
+      });
+      const data=await res.json();
+      const reply=data.content?.[0]?.text||'Sin respuesta.';
+      setMessages(prev=>[...prev,{role:'assistant',content:reply}]);
+    } catch(e) {
+      setMessages(prev=>[...prev,{role:'assistant',content:'Error al conectar. Intenta de nuevo.'}]);
+    }
+    setLoading(false);
+  };
+
+  const suggestions=[
+    '¿Cuál es el insight más importante de la investigación?',
+    '¿Qué oportunidad tiene mayor impacto para Interbank?',
+    '¿Cómo difieren los tres clusters motivacionales?',
+    '¿Por qué Plin no aparece en el campo?',
+  ];
+
+  return (
+    <>
+      {/* Floating button */}
+      <button onClick={()=>setOpen(o=>!o)} style={{
+        position:'fixed',bottom:24,right:24,zIndex:200,
+        width:52,height:52,borderRadius:'50%',
+        background:'var(--ink)',color:'#FAF8F5',
+        border:'none',fontSize:22,
+        boxShadow:'0 4px 16px rgba(0,0,0,0.2)',
+        transition:'transform 0.15s',
+        display:'flex',alignItems:'center',justifyContent:'center',
+      }}
+        onMouseEnter={e=>e.currentTarget.style.transform='scale(1.08)'}
+        onMouseLeave={e=>e.currentTarget.style.transform='scale(1)'}
+        title="Preguntar sobre la investigación"
+      >
+        {open ? '✕' : '💬'}
+      </button>
+
+      {/* Chat panel */}
+      {open && (
+        <div style={{
+          position:'fixed',bottom:86,right:24,zIndex:200,
+          width:400,height:520,
+          background:'var(--wh)',
+          border:'0.5px solid var(--bdr)',
+          borderRadius:16,
+          boxShadow:'0 8px 32px rgba(0,0,0,0.14)',
+          display:'flex',flexDirection:'column',
+          overflow:'hidden',
+        }}>
+          {/* Header */}
+          <div style={{padding:'14px 18px',borderBottom:'0.5px solid var(--bdr)',background:'var(--bg2)',display:'flex',alignItems:'center',gap:10}}>
+            <div style={{width:28,height:28,borderRadius:'50%',background:'var(--ink)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:14}}>🔬</div>
+            <div>
+              <div style={{fontFamily:'Syne',fontSize:13,fontWeight:600}}>Consultar la investigación</div>
+              <div style={{fontSize:10,color:'var(--ink3)'}}>Pregunta sobre datos, insights u oportunidades</div>
+            </div>
+          </div>
+
+          {/* Messages */}
+          <div style={{flex:1,overflowY:'auto',padding:'14px 16px',display:'flex',flexDirection:'column',gap:10}}>
+            {messages.length===0 && (
+              <div>
+                <div style={{fontSize:12,color:'var(--ink3)',marginBottom:12,lineHeight:1.6}}>
+                  Haz preguntas sobre los hallazgos, los segmentos, las oportunidades o cualquier dato de la investigación.
+                </div>
+                <div style={{display:'flex',flexDirection:'column',gap:6}}>
+                  {suggestions.map((s,i)=>(
+                    <button key={i} onClick={()=>{setInput(s);}} style={{
+                      background:'var(--bg)',border:'0.5px solid var(--bdr)',
+                      borderRadius:8,padding:'8px 12px',
+                      fontSize:11,color:'var(--ink2)',textAlign:'left',
+                      cursor:'pointer',lineHeight:1.4,
+                      transition:'background 0.1s',
+                    }}
+                      onMouseEnter={e=>e.currentTarget.style.background='var(--bg2)'}
+                      onMouseLeave={e=>e.currentTarget.style.background='var(--bg)'}
+                    >
+                      {s}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+            {messages.map((m,i)=>(
+              <div key={i} style={{
+                display:'flex',
+                justifyContent:m.role==='user'?'flex-end':'flex-start',
+              }}>
+                <div style={{
+                  maxWidth:'85%',
+                  padding:'9px 13px',
+                  borderRadius: m.role==='user'?'12px 12px 3px 12px':'12px 12px 12px 3px',
+                  background: m.role==='user'?'var(--ink)':'var(--bg2)',
+                  color: m.role==='user'?'#FAF8F5':'var(--ink)',
+                  fontSize:12,lineHeight:1.65,
+                  whiteSpace:'pre-wrap',
+                }}>
+                  {m.content}
+                </div>
+              </div>
+            ))}
+            {loading && (
+              <div style={{display:'flex',justifyContent:'flex-start'}}>
+                <div style={{padding:'9px 14px',borderRadius:'12px 12px 12px 3px',background:'var(--bg2)',fontSize:12,color:'var(--ink3)'}}>
+                  <span style={{display:'inline-flex',gap:3}}>
+                    {[0,1,2].map(i=>(
+                      <span key={i} style={{
+                        width:6,height:6,borderRadius:'50%',
+                        background:'var(--ink3)',
+                        display:'inline-block',
+                        animation:`bounce 1.2s ease-in-out ${i*0.2}s infinite`,
+                      }}/>
+                    ))}
+                  </span>
+                </div>
+              </div>
+            )}
+            <div ref={bottomRef}/>
+          </div>
+
+          {/* Input */}
+          <div style={{padding:'10px 12px',borderTop:'0.5px solid var(--bdr)',display:'flex',gap:8,alignItems:'flex-end'}}>
+            <textarea
+              value={input}
+              onChange={e=>setInput(e.target.value)}
+              onKeyDown={e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();}}}
+              placeholder="Pregunta sobre la investigación..."
+              rows={2}
+              style={{
+                flex:1,resize:'none',border:'0.5px solid var(--bdr)',
+                borderRadius:8,padding:'8px 10px',
+                fontSize:12,fontFamily:'DM Sans, sans-serif',
+                color:'var(--ink)',background:'var(--bg)',
+                outline:'none',lineHeight:1.5,
+              }}
+            />
+            <button onClick={send} disabled={!input.trim()||loading} style={{
+              width:36,height:36,borderRadius:8,
+              background: input.trim()&&!loading?'var(--ink)':'var(--bdr)',
+              color: input.trim()&&!loading?'#FAF8F5':'var(--ink3)',
+              border:'none',fontSize:16,
+              transition:'all 0.15s',flexShrink:0,
+              display:'flex',alignItems:'center',justifyContent:'center',
+            }}>↑</button>
+          </div>
+        </div>
+      )}
+
+      <style>{`
+        @keyframes bounce {
+          0%,80%,100%{transform:translateY(0)}
+          40%{transform:translateY(-5px)}
+        }
+      `}</style>
+    </>
+  );
+};
+
 // ── APP ──
-const VIEWS=[{id:'overview',label:'Inicio'},{id:'segmentos',label:'Segmentos'},{id:'metas',label:'Metas y sueños'},{id:'insights',label:'Insights'},{id:'oportunidades',label:'Oportunidades'},{id:'plataformas',label:'Deep dive'}];
+const VIEWS=[{id:'overview',label:'Inicio'},{id:'etapas',label:'Etapas de vida'},{id:'segmentos',label:'Segmentos'},{id:'metas',label:'Metas y sueños'},{id:'insights',label:'Insights'},{id:'oportunidades',label:'Oportunidades'},{id:'plataformas',label:'Deep dive'}];
 
 const App=()=>{
   const [view, setView]=useState('overview');
   const renderView=()=>{
     switch(view){
       case 'overview': return <Overview go={setView}/>;
+      case 'etapas': return <EtapasVida/>;
       case 'segmentos': return <Segmentos/>;
       case 'metas': return <Metas/>;
       case 'insights': return <Insights/>;
@@ -584,6 +1200,7 @@ const App=()=>{
         <button onClick={()=>setView('plataformas')} style={{marginLeft:'auto',fontSize:11,fontWeight:600,background:'var(--ink)',color:'#FAF8F5',padding:'6px 14px',borderRadius:6,border:'none',transition:'opacity 0.15s',whiteSpace:'nowrap'}}>Ver plataformas →</button>
       </nav>
       {renderView()}
+      <Chat/>
     </div>
   );
 };
