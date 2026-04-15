@@ -1164,22 +1164,6 @@ DATOS CLAVE:
 METAS Y SUEÑOS:
 Universidad del hijo, casa propia, colchón de salud, emprendimiento propio, experiencias familiares, estudios propios inconclusos.
 
-6 OPORTUNIDADES IDENTIFICADAS:
-1. Cuenta con propósito (Quick win) — Interbank + Sip + UTP
-2. Crédito de propósito fijo desde historial Sip (Adjacent)
-3. Consulta médica express en Inkafarma (Adjacent)
-4. Pack Sábado Familiar — Cineplanet + Bembos + Sip (Para validar)
-5. La junta digital con respaldo formal de Interbank (Disruptiva)
-6. Cuidado infantil por horas — habilitador del ecosistema (Disruptiva, LVL)
-7. Meet them where they are — principio estratégico cross-plataforma (LVL)
-8. Bring joy at home — Cineplanet/Bembos/Casa Andina en el hogar (Disruptiva)
-
-PLATAFORMAS INTERCORP: Retail (Mass, PlazaVea, Real Plaza), Salud (Inkafarma, Clínica Aviva), Finanzas (Interbank, Sip), Educación (UTP, Innova Schools), Entretenimiento (Cineplanet, Bembos, Casa Andina).
-
-SEÑAL COMPETITIVA: Yape = Credicorp (BCP), el principal competidor. Plin = Interbank. Credicorp ganó el pago cotidiano. El territorio de Intercorp está en lo que Yape no puede hacer.
-
-Responde en español. Sé directo, conciso y basado en evidencia. Si algo no está en los datos de la investigación, dilo claramente. No inventes hallazgos.`;
-
 const Chat=()=>{
   const [messages, setMessages]=useState([]);
   const [input, setInput]=useState('');
@@ -1221,7 +1205,7 @@ const Chat=()=>{
 
   const suggestions=[
     '¿Cuál es el insight más importante de la investigación?',
-    '¿Qué oportunidad tiene mayor impacto para Interbank?',
+    '¿Qué oportunidad tiene mayor impacto para Intercorp?',
     '¿Cómo difieren los tres clusters motivacionales?',
     '¿Por qué Plin no aparece en el campo?',
   ];
@@ -1537,156 +1521,7 @@ const Journey=()=>{
     </div>
   );
 };
-
-// ── SIZING ──
-const Sizing=()=>{
-  const [active,setActive]=useState('o1');
-  const s=SIZING.find(x=>x.id===active)||SIZING[0];
-  const fmtM=v=>`S/ ${(v/1000).toFixed(1)}B`;
-  const fmt=v=>`S/ ${v.toLocaleString()}M`;
-
-  return(
-    <div style={{maxWidth:960,margin:'0 auto',padding:'40px 32px 80px'}}>
-      <Eyebrow label="Dimensionamiento · Análisis de mercado"/>
-      <div style={{fontFamily:'Syne',fontSize:26,fontWeight:700,marginBottom:8}}>Tamaño de las oportunidades</div>
-      <div style={{fontSize:13,color:'var(--ink3)',marginBottom:6,lineHeight:1.65}}>
-        Modelo bottom-up: Gasto NSE C Lima (S/ 3,700/mes · APEIM 2023) × 1.55M hogares = S/ 68,820M/año mercado total. Cada oportunidad dimensionada en TAM → SAM → SOM con supuestos explícitos.
-      </div>
-      <div style={{fontSize:11,color:'var(--ink3)',marginBottom:24,padding:'8px 12px',background:'rgba(196,147,58,0.06)',borderRadius:7,border:'0.5px solid var(--gold-bd)'}}>
-        ⚠ Estimados indicativos para dimensionar la priorización estratégica — no proyecciones financieras. Los supuestos están documentados en cada oportunidad. La captura real de Intercorp depende de penetración actual, capacidad de ejecución y velocidad de lanzamiento.
-      </div>
-
-      {/* Selector */}
-      <div style={{display:'flex',gap:6,flexWrap:'wrap',marginBottom:20}}>
-        {SIZING.map(x=>(
-          <button key={x.id} onClick={()=>setActive(x.id)} style={{
-            padding:'6px 12px',borderRadius:100,fontSize:11,fontWeight:500,
-            border:active===x.id?'none':'0.5px solid var(--bdr)',
-            background:active===x.id?x.color:'var(--wh)',
-            color:active===x.id?'#FAF8F5':'var(--ink3)',
-            transition:'all 0.15s',
-          }}>{x.titulo.split('—')[0].trim()}</button>
-        ))}
-      </div>
-
-      {/* Summary cards top */}
-      <div style={{display:'grid',gridTemplateColumns:'repeat(7,1fr)',gap:8,marginBottom:16}}>
-        {SIZING.map(x=>(
-          <div key={x.id} onClick={()=>setActive(x.id)} style={{
-            background: active===x.id?x.color:'var(--wh)',
-            border:`0.5px solid ${active===x.id?x.color:'var(--bdr)'}`,
-            borderRadius:10,padding:'12px 10px',cursor:'pointer',
-            transition:'all 0.15s',textAlign:'center',
-          }}>
-            <div style={{fontFamily:'Syne',fontSize:14,fontWeight:700,color:active===x.id?'#FAF8F5':x.color,lineHeight:1,marginBottom:3}}>
-              {fmt(x.oportunidad)}
-            </div>
-            <div style={{fontSize:9,color:active===x.id?'rgba(255,255,255,0.6)':'var(--ink3)',lineHeight:1.3}}>{x.titulo.split('—')[0].replace('La ','').replace('Cuenta con ','').replace('Crédito de ','').trim().substring(0,18)}</div>
-          </div>
-        ))}
-      </div>
-
-      {/* Detail */}
-      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:14,alignItems:'start'}}>
-
-        {/* TAM / SAM / SOM */}
-        <div>
-          <div style={{background:'var(--wh)',border:`0.5px solid ${s.color}33`,borderRadius:12,overflow:'hidden'}}>
-            <div style={{padding:'16px 20px',borderBottom:'0.5px solid var(--bdr)',background:'var(--bg2)',display:'flex',alignItems:'center',gap:10}}>
-              <div style={{width:4,borderRadius:2,background:s.color,alignSelf:'stretch',flexShrink:0}}/>
-              <div>
-                <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1.5px',color:s.color,marginBottom:2}}>{s.tipo} · {s.plat}</div>
-                <div style={{fontFamily:'Syne',fontSize:15,fontWeight:600}}>{s.titulo}</div>
-              </div>
-            </div>
-
-            {/* TAM SAM SOM bars */}
-            {[
-              {label:'TAM',sublabel:s.tamLabel,val:s.mercadoTotal,pct:100,col:s.color+'33',border:s.color+'66'},
-              {label:'SAM',sublabel:s.samLabel,val:Math.round(s.mercadoTotal*(s.shareTarget/100)*1.2),pct:s.shareTarget*1.2,col:s.color+'55',border:s.color+'88'},
-              {label:'SOM',sublabel:s.somLabel,val:s.oportunidad,pct:(s.oportunidad/s.mercadoTotal)*100,col:s.color,border:s.color},
-            ].map((tier,i)=>(
-              <div key={i} style={{padding:'14px 20px',borderBottom:'0.5px solid var(--bdr2)'}}>
-                <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:6}}>
-                  <div>
-                    <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:3}}>
-                      <span style={{fontFamily:'Syne',fontSize:13,fontWeight:700,color:s.color}}>{tier.label}</span>
-                      <span style={{fontSize:9,fontWeight:600,padding:'1px 6px',borderRadius:100,background:`${s.color}15`,color:s.color}}>
-                        {tier.label==='TAM'?'Mercado total':tier.label==='SAM'?'Mercado accesible':'Captura realista'}
-                      </span>
-                    </div>
-                    <div style={{fontSize:11,color:'var(--ink3)',lineHeight:1.4}}>{tier.sublabel}</div>
-                  </div>
-                  <div style={{fontFamily:'Syne',fontSize:20,fontWeight:700,color:tier.label==='SOM'?s.color:'var(--ink)',textAlign:'right',flexShrink:0,marginLeft:10}}>
-                    {fmt(tier.val)}
-                  </div>
-                </div>
-                <div style={{height:6,background:'var(--bg2)',borderRadius:3,overflow:'hidden'}}>
-                  <div style={{height:'100%',width:`${Math.min(tier.pct,100)}%`,background:tier.col,borderRadius:3,border:`1px solid ${tier.border}`}}/>
-                </div>
-              </div>
-            ))}
-
-            {/* SOM destacado */}
-            <div style={{padding:'16px 20px',background:`${s.color}08`}}>
-              <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1px',color:s.color,marginBottom:6}}>Oportunidad para Intercorp (SOM)</div>
-              <div style={{fontFamily:'Syne',fontSize:32,fontWeight:800,color:s.color,lineHeight:1,marginBottom:4}}>{fmt(s.oportunidad)}/año</div>
-              <div style={{fontSize:12,color:'var(--ink2)',lineHeight:1.65}}>{s.palanca}</div>
-            </div>
-          </div>
-        </div>
-
-        {/* Metodología + supuestos */}
-        <div style={{display:'flex',flexDirection:'column',gap:12}}>
-          <div style={{background:'var(--wh)',border:'0.5px solid var(--bdr)',borderRadius:12,padding:'16px 18px'}}>
-            <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1.5px',color:'var(--ink3)',marginBottom:12}}>Cadena de cálculo · bottom-up</div>
-            <div style={{display:'flex',flexDirection:'column',gap:8}}>
-              {s.metodologia.map((step,i)=>(
-                <div key={i} style={{display:'flex',gap:10,alignItems:'flex-start'}}>
-                  <div style={{
-                    width:20,height:20,borderRadius:'50%',
-                    background:`${s.color}15`,color:s.color,
-                    fontSize:10,fontWeight:700,
-                    display:'flex',alignItems:'center',justifyContent:'center',
-                    flexShrink:0,marginTop:1,
-                  }}>{i+1}</div>
-                  <div style={{fontSize:11.5,color:'var(--ink2)',lineHeight:1.6}}>{step}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div style={{background:'var(--bg2)',border:'0.5px solid var(--bdr)',borderRadius:12,padding:'14px 16px'}}>
-            <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1.5px',color:'var(--ink3)',marginBottom:6}}>Supuestos y fuentes</div>
-            <div style={{fontSize:11.5,color:'var(--ink2)',lineHeight:1.65}}>{s.supuestos}</div>
-          </div>
-
-          {/* Comparativa total */}
-          <div style={{background:'#0A0908',borderRadius:12,padding:'16px 18px'}}>
-            <div style={{fontSize:9,fontWeight:600,textTransform:'uppercase',letterSpacing:'1.5px',color:'rgba(250,248,245,0.4)',marginBottom:10}}>Todas las oportunidades · SOM comparado</div>
-            {SIZING.map(x=>(
-              <div key={x.id} onClick={()=>setActive(x.id)} style={{display:'flex',alignItems:'center',gap:10,marginBottom:7,cursor:'pointer',opacity:active===x.id?1:0.6,transition:'opacity 0.15s'}}>
-                <div style={{fontSize:10,color:'rgba(250,248,245,0.5)',width:90,flexShrink:0,textAlign:'right',lineHeight:1.3}}>
-                  {x.titulo.split('—')[0].trim().substring(0,18)}
-                </div>
-                <div style={{flex:1,height:6,background:'rgba(255,255,255,0.08)',borderRadius:3}}>
-                  <div style={{height:'100%',width:`${(x.oportunidad/400)*100}%`,background:active===x.id?x.color:'rgba(255,255,255,0.25)',borderRadius:3,transition:'background 0.2s'}}/>
-                </div>
-                <div style={{fontSize:11,fontWeight:600,color:active===x.id?x.color:'rgba(250,248,245,0.5)',width:62,flexShrink:0}}>{fmt(x.oportunidad)}</div>
-              </div>
-            ))}
-            <div style={{marginTop:10,paddingTop:10,borderTop:'0.5px solid rgba(255,255,255,0.08)',fontSize:11,color:'rgba(250,248,245,0.35)'}}>
-              Total SOM acumulado: <span style={{color:'var(--gold)',fontWeight:600}}>
-                S/ {SIZING.reduce((acc,x)=>acc+x.oportunidad,0).toLocaleString()}M/año
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
+     
 // ── APP ──
 const VIEWS=[{id:'overview',label:'Inicio'},{id:'etapas',label:'Etapas de vida'},{id:'journey',label:'Journey'},{id:'segmentos',label:'Segmentos'},{id:'metas',label:'Metas y sueños'},{id:'insights',label:'Insights'},{id:'oportunidades',label:'Oportunidades'},{id:'sizing',label:'Dimensionamiento'},{id:'plataformas',label:'Deep dive'}];
 
@@ -1700,30 +1535,8 @@ const App=()=>{
       case 'segmentos': return <Segmentos/>;
       case 'metas': return <Metas/>;
       case 'insights': return <Insights/>;
-      case 'oportunidades': return <Oportunidades/>;
-      case 'sizing': return <Sizing/>;
-      case 'plataformas': return <Plataformas/>;
       default: return <Overview go={setView}/>;
-    }
-  };
-  return (
-    <div>
-      <nav style={{position:'sticky',top:0,zIndex:100,background:'rgba(247,245,241,0.96)',backdropFilter:'blur(12px)',borderBottom:'0.5px solid var(--bdr)',padding:'0 32px',display:'flex',alignItems:'center',gap:0,height:52}}>
-        <div style={{fontFamily:'Syne',fontSize:11,fontWeight:600,letterSpacing:'2px',textTransform:'uppercase',color:'var(--gold)',marginRight:24,whiteSpace:'nowrap',cursor:'pointer'}} onClick={()=>setView('overview')}>
-          LVL <span style={{color:'var(--ink3)'}}>×</span> Intercorp
-        </div>
-        <div style={{display:'flex',gap:0,flex:1,overflowX:'auto'}}>
-          {VIEWS.map(v=>(
-            <button key={v.id} onClick={()=>setView(v.id)} style={{fontSize:12,fontWeight:400,color:view===v.id?'var(--ink)':'var(--ink3)',padding:'0 14px',height:52,background:'none',border:'none',borderBottom:view===v.id?'2px solid var(--gold)':'2px solid transparent',transition:'all 0.15s',whiteSpace:'nowrap'}}>{v.label}</button>
-          ))}
-        </div>
-        <button onClick={()=>setView('plataformas')} style={{marginLeft:'auto',fontSize:11,fontWeight:600,background:'var(--ink)',color:'#FAF8F5',padding:'6px 14px',borderRadius:6,border:'none',transition:'opacity 0.15s',whiteSpace:'nowrap'}}>Ver plataformas →</button>
-      </nav>
-      {renderView()}
-      <Chat/>
-    </div>
-  );
-};
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
 </script>
